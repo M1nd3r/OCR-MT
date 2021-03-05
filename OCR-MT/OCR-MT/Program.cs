@@ -12,6 +12,7 @@ namespace OCR_MT {
             //Interface Segregation Principle
             //Dependency Inversion Principle
             Out(Environment.ProcessorCount.ToString());
+
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("cs");
             Console.WriteLine(Strings.Welcome+", "+Environment.UserName);
         }

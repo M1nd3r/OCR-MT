@@ -35,10 +35,11 @@ namespace OCR_MT.Core {
         }
     }
     internal class ComponentBW_byte : ComponentBW {        
-        public static ComponentBW_byte Create(ComponentBWFactory factory) {
-            ComponentBW_byte r = new ComponentBW_byte(factory.GetID);
-            while (factory.HasNextPixel) {
-                r.AddPixel(factory.GetNextPixel());
+        public static ComponentBW_byte Create() {
+            ComponentBWCreator creator = ComponentBWFactory.GetComponentBWCreator();
+            ComponentBW_byte r = new ComponentBW_byte(creator.GetID);
+            while (creator.HasNextPixel) {
+                r.AddPixel(creator.GetNextPixel());
             }
             r.Finish();
             return r;
@@ -65,7 +66,7 @@ namespace OCR_MT.Core {
         
     }
     internal class ComponentBW_bit:ComponentBW {
-        public static ComponentBW_bit Create(ComponentBWFactory factory) {
+        public static ComponentBW_bit Create(ComponentBWCreator factory) {
             ComponentBW_bit r = new ComponentBW_bit(factory.GetID);
             while (factory.HasNextPixel) {
                 r.AddPixel(factory.GetNextPixel());
