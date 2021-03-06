@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Text;
+using OCR_MT.Core;
 
 namespace OCR_MT.IO {
-    internal interface IImageHandler {
-
+    interface IMatrixBWLoader {
+        public MatrixBW Load(string path);
     }
 }

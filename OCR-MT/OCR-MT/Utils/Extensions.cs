@@ -56,6 +56,7 @@ namespace OCR_MT.Utils {
                 }
             }
         }
+        /*
         public static void PrintToConsole(this int[,] arr) {
             for (int y = 0; y < arr.GetLength(1); y++) {
                 for (int x = 0; x < arr.GetLength(0); x++) {
@@ -65,6 +66,7 @@ namespace OCR_MT.Utils {
                 throw new Exception();
             }
         }
+        */
         public static void SetAllToZero(this Matrix<int> m) {
             for (int x = 0; x < m.Width; x++) {
                 for (int y = 0; y < m.Height; y++) {

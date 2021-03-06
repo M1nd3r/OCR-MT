@@ -45,13 +45,13 @@ namespace OCR_MT.Core {
             return r;
         }
         private ComponentBW_byte(int ID) : base(ID) { }
-        public Matrix<byte> Matrix { get; protected set; }
+        public MatrixBW Matrix { get; protected set; }
         public virtual void Finish() {
             long sumX = 0, sumY = 0;
             SizeX = (MaxX - MinX + 1);
             SizeY = (MaxY - MinY + 1);
 
-            var m = new Matrix<byte>(SizeX, SizeY);
+            var m = new MatrixBW(SizeX, SizeY);
             m.SetAllToZero();
             foreach (var c in coords) {
                 m[c.X - MinX, c.Y - MinY] = 1;

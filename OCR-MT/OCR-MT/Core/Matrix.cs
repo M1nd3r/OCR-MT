@@ -3,11 +3,11 @@ using System.Collections;
 
 namespace OCR_MT.Core {
 
-    public abstract class Matrix {
+    internal abstract class Matrix {
         public int Width { get; protected set; }
         public int Height { get; protected set; }
     }
-    public sealed class MatrixBit : Matrix {
+    internal sealed class MatrixBit : Matrix {
         private BitArray field;
         public MatrixBit(int width, int height) {
             Height = height;
@@ -20,8 +20,8 @@ namespace OCR_MT.Core {
             set => field[y * Width + x] = value;
         }
     }
-    public sealed class Matrix<T> : Matrix {
-        private T[,] field;
+    internal class Matrix<T> : Matrix {
+        protected T[,] field;
 
         public Matrix(int width, int height) {
             Height = height;
@@ -36,7 +36,7 @@ namespace OCR_MT.Core {
             Height = field.GetLength(1);
         }
 
-        public T this[int x, int y] {
+        public virtual T this[int x, int y] {
             get => field[x, y];
             set => field[x, y] = value;
         }
@@ -67,5 +67,13 @@ namespace OCR_MT.Core {
             return r;
         }
     }
+    internal class MatrixBW : Matrix<byte> {
+        public MatrixBW(int width, int height) : base(width, height) { }
+            public override byte this[int x, int y] {
+            get => field[x, y];
+            set => field[x, y] = (value == 0 || value == 1) ? value : field[x, y];
+        }    
+    }
 }
+
 

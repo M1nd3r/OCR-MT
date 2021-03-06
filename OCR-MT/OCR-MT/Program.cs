@@ -11,8 +11,8 @@ namespace OCR_MT {
             //Liskov substitution Principle
             //Interface Segregation Principle
             //Dependency Inversion Principle
+           
             Out(Environment.ProcessorCount.ToString());
-
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("cs");
             Console.WriteLine(Strings.Welcome+", "+Environment.UserName);
         }
