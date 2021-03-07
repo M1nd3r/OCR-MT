@@ -53,6 +53,12 @@ namespace OCR_MT.IO {
             logger.Out(nameof(MatrixBWLoaderMT<T>) + nameof(InitializeThread) + ": Lock released");
 
         }
+        public IEnumerable<MatrixBW> Load(ICollection<string> paths) {
+            List<MatrixBW> r = new List<MatrixBW>();
+            foreach (var path in paths)
+                r.Add(Load(path));
+            return r;
+        }
         public int GetOpened() {
             for (int i = 0; i < _open.Length; i++) {
                 if (_open[i]) {
