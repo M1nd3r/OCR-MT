@@ -13,7 +13,7 @@ namespace OCR_MT.MT {
         private List<Thread> _threads;
         private ThreadManager() {
             _tm = this;
-            _available = Environment.ProcessorCount-1;
+            _available = Environment.ProcessorCount;
             _threads = new List<Thread>();
         }
         //Singleton pattern

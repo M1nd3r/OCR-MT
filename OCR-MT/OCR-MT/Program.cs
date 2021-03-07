@@ -3,9 +3,12 @@ using System.Globalization;
 using System.Threading;
 using OCR_MT.Localisation;
 using OCR_MT.Experiments;
+using OCR_MT.MT;
+using OCR_MT.Logging;
 
 namespace OCR_MT {
     class Program {
+        private static ILogger logger = LoggerFactory.GetLogger();
         static void Main(string[] args) {
             //SOLID
             //Single Responsibility Principle
@@ -13,21 +16,11 @@ namespace OCR_MT {
             //Liskov substitution Principle
             //Interface Segregation Principle
             //Dependency Inversion Principle
-
-            LoadingImages.TestIS_MT();
-            LoadingImages.TestIS_MT();
-            LoadingImages.TestIS_MT();
-            LoadingImages.TestIS_MT();
-
+            ThreadManager tm = ThreadManager.GetThreadManager();
+            logger.Out(tm.ThreadsAvailable().ToString());
+            LoadingImages.TestIS_MT3(500);
             LoadingImages.TestIS();
             LoadingImages.TestIS2();
-            //LoadingImages.TestIS_MT();
-            LoadingImages.TestIS();
-            LoadingImages.TestIS2();
-            LoadingImages.TestIS_MT();
-            LoadingImages.TestIS();
-            LoadingImages.TestIS2();
-           // LoadingImages.TestIS_MT();
 
             Out(Environment.ProcessorCount.ToString());
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("cs");
