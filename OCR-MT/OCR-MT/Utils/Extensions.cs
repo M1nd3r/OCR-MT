@@ -16,6 +16,10 @@ namespace OCR_MT.Utils {
             for (int x = 0; x < arr.Length; x++)
                 arr[x] = false;
         }
+        public static void SetAllToTrue(this bool[] arr) {
+            for (int x = 0; x < arr.Length; x++)
+                arr[x] = true;
+        }
         public static double Max(this double[] arr) {
             double r = Double.NegativeInfinity;
             for (int i = 0; i < arr.Length; i++) {

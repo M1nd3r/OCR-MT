@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections;
+using static OCR_MT.Utils.Constants;
 
 namespace OCR_MT.Core {
 
@@ -71,7 +72,7 @@ namespace OCR_MT.Core {
         public MatrixBW(int width, int height) : base(width, height) { }
             public override byte this[int x, int y] {
             get => field[x, y];
-            set => field[x, y] = (value == 0 || value == 1) ? value : field[x, y];
+            set => field[x, y] = (value == Colors.Black_byte || value == Colors.White_byte) ? value : field[x, y];
         }    
     }
 }
