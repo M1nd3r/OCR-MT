@@ -29,7 +29,10 @@ namespace OCR_MT.Experiments {
             MatrixBW[] images = new MatrixBW[pages];
             t.Start();
             for (int i = 0; i < images.Length; i++) {
-                images[i] = loader.Load(@"D:\MFF\04-LS-2\C#\OCR\images\JakobeiBW\Jakobei_Convert_0" + (i + 10).ToString() + ".png");
+                var s = "";
+                if (i + 10 < 100)
+                    s = "0";
+                images[i] = loader.Load(@"D:\MFF\04-LS-2\C#\OCR\images\JakobeiBW\Jakobei_Convert_"+s + (i + 10).ToString() + ".png");
             }
             t.Stop();
             Console.WriteLine(t.Elapsed);
@@ -53,7 +56,10 @@ namespace OCR_MT.Experiments {
             MatrixBW[] images = new MatrixBW[pages];
             t.Start();
             for (int i = 0; i < images.Length; i++) {
-                images[i] = loader.Load(@"D:\MFF\04-LS-2\C#\OCR\images\JakobeiBW\Jakobei_Convert_0" + (i + 10).ToString() + ".png");
+                var s = "";
+                if (i + 10 < 100)
+                    s = "0";
+                images[i] = loader.Load(@"D:\MFF\04-LS-2\C#\OCR\images\JakobeiBW\Jakobei_Convert_" +s+ (i + 10).ToString() + ".png");
             }
             t.Stop();
             Console.WriteLine(t.Elapsed);
@@ -80,7 +86,10 @@ namespace OCR_MT.Experiments {
             List<MatrixBW> images;
             List<string> paths = new List<string>();
             for (int i = 0; i < pages; i++) {
-                paths.Add(@"D:\MFF\04-LS-2\C#\OCR\images\JakobeiBW\Jakobei_Convert_0" + (i + 10).ToString() + ".png");
+                var s = "";
+                if (i + 10 < 100)
+                    s = "0";
+                paths.Add(@"D:\MFF\04-LS-2\C#\OCR\images\JakobeiBW\Jakobei_Convert_" + s + (i + 10).ToString() + ".png");
             }
             t.Start();
             images = new List<MatrixBW>(loader5.Load(paths));

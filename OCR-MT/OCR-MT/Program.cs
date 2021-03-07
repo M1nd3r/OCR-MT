@@ -19,8 +19,8 @@ namespace OCR_MT {
             ThreadManager tm = ThreadManager.GetThreadManager();
             logger.Out(tm.ThreadsAvailable().ToString());
             LoadingImages.TestIS_MT3(500);
-            LoadingImages.TestIS();
-            LoadingImages.TestIS2();
+            //LoadingImages.TestIS(500);
+            LoadingImages.TestIS2(500);
 
             Out(Environment.ProcessorCount.ToString());
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("cs");
