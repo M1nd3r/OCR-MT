@@ -10,5 +10,8 @@ namespace OCR_MT.Utils {
             internal readonly static byte Black_byte = 0;
             internal readonly static byte White_byte = 255;
         }
+        internal static class Paths {
+            internal readonly static string ExperimentsOutput = "../../../ExperimentsOutput/";
+        }
     }
 }

@@ -18,7 +18,7 @@ namespace OCR_MT {
             //Dependency Inversion Principle
             ThreadManager tm = ThreadManager.GetThreadManager();
             logger.Out(tm.ThreadsAvailable().ToString());
-            LoadingImages.TestIS_MT3(500);
+            LoadingImages.TestIS_MT3(10);
             //LoadingImages.TestIS(500);
             LoadingImages.TestIS2(500);
 

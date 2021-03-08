@@ -7,6 +7,15 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ExperimentsOutput\**" />
+    <Compile Remove="MT2_parser637508424419021616\**" />
+    <EmbeddedResource Remove="ExperimentsOutput\**" />
+    <EmbeddedResource Remove="MT2_parser637508424419021616\**" />
+    <None Remove="ExperimentsOutput\**" />
+    <None Remove="MT2_parser637508424419021616\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <PackageReference Include="SixLabors.ImageSharp" Version="1.0.3" />
   </ItemGroup>
 

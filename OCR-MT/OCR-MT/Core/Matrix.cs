@@ -68,13 +68,11 @@ namespace OCR_MT.Core {
             return r;
         }
     }
-    internal class MatrixBW : Matrix<byte> {
+    internal class MatrixBW : Matrix<byte>, Imaging.IImage<byte> {
         public MatrixBW(int width, int height) : base(width, height) { }
-            public override byte this[int x, int y] {
+        public override byte this[int x, int y] {
             get => field[x, y];
             set => field[x, y] = (value == Colors.Black_byte || value == Colors.White_byte) ? value : field[x, y];
-        }    
+        }
     }
 }
-
-

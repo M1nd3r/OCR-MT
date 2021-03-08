@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using static OCR_MT.Utils.Constants;
 using static OCR_MT.Utils.Extensions;
 
 namespace OCR_MT.Core {
@@ -34,7 +35,7 @@ namespace OCR_MT.Core {
                 MaxY = coord.Y;
         }
     }
-    internal class ComponentBW_byte : ComponentBW {        
+    internal class ComponentBW_byte : ComponentBW, IComponent<byte> {        
         public static ComponentBW_byte Create() {
             ComponentBWCreator creator = ComponentBWFactory.GetComponentBWCreator();
             ComponentBW_byte r = new ComponentBW_byte(creator.GetID);
@@ -45,7 +46,10 @@ namespace OCR_MT.Core {
             return r;
         }
         private ComponentBW_byte(int ID) : base(ID) { }
-        public MatrixBW Matrix { get; protected set; }
+        public MatrixBW Matrix { get;protected set; }
+
+        public byte this[int x, int y] { get => Matrix[x,y]; protected set => Matrix[x, y] = value; }
+
         public virtual void Finish() {
             long sumX = 0, sumY = 0;
             SizeX = (MaxX - MinX + 1);
@@ -65,7 +69,7 @@ namespace OCR_MT.Core {
         }
         
     }
-    internal class ComponentBW_bit:ComponentBW {
+    internal class ComponentBW_bit : ComponentBW, IComponent<byte> {
         public static ComponentBW_bit Create(ComponentBWCreator factory) {
             ComponentBW_bit r = new ComponentBW_bit(factory.GetID);
             while (factory.HasNextPixel) {
@@ -76,6 +80,8 @@ namespace OCR_MT.Core {
         }
         private ComponentBW_bit(int ID) : base(ID) { }
         public MatrixBit Matrix { get; protected set; }
+        public byte this[int x, int y] { get => (Matrix[x, y])?Colors.Black_byte:Colors.White_byte; protected set => Matrix[x, y] = (value==Colors.Black_byte); }
+
 
         public virtual void Finish() {
             long sumX = 0, sumY = 0;

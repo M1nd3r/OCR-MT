@@ -68,7 +68,7 @@ namespace OCR_MT.Experiments {
                 
         public static void TestIS_MT3(int pages=50) {
             Console.WriteLine("IS_MT3:");
-            MatrixBWLoader_MT<MatrixBWParser_MT2> loader5 = new MatrixBWLoader_MT<MatrixBWParser_MT2>(new MatrixBWParser_MT2());
+            MatrixBWLoader_MT<MatrixBWParser_MT> loader5 = new MatrixBWLoader_MT<MatrixBWParser_MT>(new MatrixBWParser_MT());
             Stopwatch t = new Stopwatch();
 
             t.Start();
@@ -78,7 +78,7 @@ namespace OCR_MT.Experiments {
             t.Reset();
 
             t.Start();
-            MatrixBWLoader_MT<MatrixBWParser_MT2> loader4 = new MatrixBWLoader_MT<MatrixBWParser_MT2>(new MatrixBWParser_MT2());
+            MatrixBWLoader_MT<MatrixBWParser_MT> loader4 = new MatrixBWLoader_MT<MatrixBWParser_MT>(new MatrixBWParser_MT());
             MatrixBW image4 = loader4.Load(@"D:\MFF\04-LS-2\C#\OCR\images\JakobeiBW\Jakobei_Convert_011.png");
             t.Stop();
             Console.WriteLine(t.Elapsed);
@@ -93,13 +93,13 @@ namespace OCR_MT.Experiments {
             }
             t.Start();
             images = new List<MatrixBW>(loader5.Load(paths));
-            string path = "../../../" +"MT2_parser"+ DateTime.Now.Ticks.ToString() + "/";
+            string path = Paths.ExperimentsOutput +"MT2_parser"+ DateTime.Now.Ticks.ToString() + "/";
             Directory.CreateDirectory(path);
             t.Stop();
             Console.WriteLine(t.Elapsed);
             t.Restart();
             for (int i = 0; i < images.Count; i++) {
-                //MatrixBWSaver.SaveMatrixBW(images[i], path + i.ToString() + ".png");
+                MatrixBWSaver.SaveMatrixBW(images[i], path + i.ToString() + ".png");
             }
             t.Stop();
             Console.WriteLine(t.Elapsed);

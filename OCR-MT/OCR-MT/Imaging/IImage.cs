@@ -7,5 +7,5 @@
     }
     interface BW {
         public byte Intensity { get; }
-    }
+    }    
 }
