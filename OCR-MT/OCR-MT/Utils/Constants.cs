@@ -12,6 +12,7 @@ namespace OCR_MT.Utils {
         }
         internal static class Paths {
             internal readonly static string ExperimentsOutput = "../../../ExperimentsOutput/";
+            internal readonly static string ExperimentsInput = "../../../ExperimentsInput/";
         }
     }
 }

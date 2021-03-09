@@ -19,6 +19,7 @@ namespace OCR_MT {
             ThreadManager tm = ThreadManager.GetThreadManager();
             logger.Out(tm.ThreadsAvailable().ToString());
 
+            ExtractingComponents.TestCreation();
             LoadingImages.TestIS_ST(50);
 
             LoadingImages.TestIS2(50);

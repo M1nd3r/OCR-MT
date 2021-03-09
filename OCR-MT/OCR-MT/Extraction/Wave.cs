@@ -12,7 +12,8 @@ namespace OCR_MT.Extraction {
             _img = img;
             _x = 0;
             _y = 0;
-            _tested.SetAllToFalse();
+            _tested = new bool[img.Width + 2, img.Height + 2];
+            _tested.SetFrameToTrueInsideToFalse();
         }       
     }
     

@@ -5,8 +5,8 @@ using System.Text;
 namespace OCR_MT.Core {
     internal interface IComponent {
         public int ID { get; }
-        public int SizeX { get; }
-        public int SizeY { get; }
+        public int Width { get; }
+        public int Height { get; }
         public int MaxX { get; }
         public int MinX { get; }
         public int MaxY { get; }

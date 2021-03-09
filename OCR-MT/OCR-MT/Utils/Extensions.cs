@@ -20,6 +20,21 @@ namespace OCR_MT.Utils {
             for (int x = 0; x < arr.Length; x++)
                 arr[x] = true;
         }
+        public static void SetFrameToTrueInsideToFalse(this bool[,] arr) {
+            for (int y = 1; y < arr.GetLength(1)-1; y++) {
+                for (int x = 1; x < arr.GetLength(0)-1; x++) {
+                    arr[x, y] = false;
+                }
+            }
+            for (int x = 0; x < arr.GetLength(0); x++) {
+                arr[x, 0] = true;
+                arr[x, arr.GetLength(1) - 1] = true;
+            }
+            for (int y = 1; y < arr.GetLength(1) - 1; y++) {
+                arr[0, y] = true;
+                arr[arr.GetLength(0) - 1, y] = true;
+            }
+        }
         public static double Max(this double[] arr) {
             double r = Double.NegativeInfinity;
             for (int i = 0; i < arr.Length; i++) {
@@ -82,6 +97,13 @@ namespace OCR_MT.Utils {
             for (int x = 0; x < m.Width; x++) {
                 for (int y = 0; y < m.Height; y++) {
                     m[x, y] = 0;
+                }
+            }
+        }
+        public static void SetAllToMax(this Matrix<byte> m) {
+            for (int x = 0; x < m.Width; x++) {
+                for (int y = 0; y < m.Height; y++) {
+                    m[x, y] = 255;
                 }
             }
         }

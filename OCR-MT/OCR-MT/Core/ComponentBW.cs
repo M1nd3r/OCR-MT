@@ -1,16 +1,19 @@
-﻿using System;
+﻿using OCR_MT.Imaging;
+using System;
 using System.Collections.Generic;
 using static OCR_MT.Utils.Constants;
 using static OCR_MT.Utils.Extensions;
 
 namespace OCR_MT.Core {
-    internal abstract class ComponentBW<T> : IComponent<T> {
+    internal abstract class ComponentBW<T> : IComponent<T>, IImage<T> {
         protected List<(int X, int Y)> coords = new List<(int X, int Y)>();
         public ComponentBW(int ID) {
             this.ID = ID;
+            this.MinX = int.MaxValue;
+            this.MinY = int.MaxValue;
+            
         }
-        public ComponentBW(Queue<(int, int)> q, int ID) {
-            this.ID = ID;
+        public ComponentBW(Queue<(int, int)> q, int ID):this(ID) {
             while (q.Count > 0)
                 AddPixel(q.Dequeue());
         }
@@ -19,9 +22,9 @@ namespace OCR_MT.Core {
 
         public int ID { get; }
 
-        public int SizeX { get; protected set; }
+        public int Width { get; protected set; }
 
-        public int SizeY { get; protected set; }
+        public int Height { get; protected set; }
 
         public int MaxX { get; protected set; }
         public int MinX { get; protected set; }
@@ -53,13 +56,13 @@ namespace OCR_MT.Core {
 
         public virtual void Finish() {
             long sumX = 0, sumY = 0;
-            SizeX = (MaxX - MinX + 1);
-            SizeY = (MaxY - MinY + 1);
+            Width = (MaxX - MinX + 1);
+            Height = (MaxY - MinY + 1);
 
-            var m = new MatrixBW(SizeX, SizeY);
-            m.SetAllToZero();
+            var m = new MatrixBW(Width, Height);
+            m.SetAllToMax();
             foreach (var c in coords) {
-                m[c.X - MinX, c.Y - MinY] = 1;
+                m[c.X - MinX, c.Y - MinY] = Colors.Black_byte;
                 sumX += c.X;
                 sumY += c.Y;
             }
@@ -78,10 +81,10 @@ namespace OCR_MT.Core {
 
         public virtual void Finish() {
             long sumX = 0, sumY = 0;
-            SizeX = (MaxX - MinX + 1);
-            SizeY = (MaxY - MinY + 1);
+            Width = (MaxX - MinX + 1);
+            Height = (MaxY - MinY + 1);
 
-            var m = new MatrixBit(SizeX, SizeY);
+            var m = new MatrixBit(Width, Height);
             foreach (var c in coords) {
                 m[c.X - MinX, c.Y - MinY] = true;
                 sumX += c.X;

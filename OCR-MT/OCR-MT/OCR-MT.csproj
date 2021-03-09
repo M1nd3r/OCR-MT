@@ -7,10 +7,13 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="ExperimentsInput\**" />
     <Compile Remove="ExperimentsOutput\**" />
     <Compile Remove="MT2_parser637508424419021616\**" />
+    <EmbeddedResource Remove="ExperimentsInput\**" />
     <EmbeddedResource Remove="ExperimentsOutput\**" />
     <EmbeddedResource Remove="MT2_parser637508424419021616\**" />
+    <None Remove="ExperimentsInput\**" />
     <None Remove="ExperimentsOutput\**" />
     <None Remove="MT2_parser637508424419021616\**" />
   </ItemGroup>

@@ -107,7 +107,7 @@ namespace OCR_MT.Experiments {
         }
 
         public static void TestIS_ST(int pages = 50) {
-            Console.WriteLine("IS_MT3:");
+            Console.WriteLine("IS_ST:");
             ImageBWLoader loader5 = new ImageBWLoader(ImageBWParserFactory.GetParser());
             Stopwatch t = new Stopwatch();
 
@@ -133,10 +133,11 @@ namespace OCR_MT.Experiments {
             }
             t.Start();
             images = new List<IImage<byte>>(loader5.Load(paths));
-            string path = Paths.ExperimentsOutput + "ST_parser" + DateTime.Now.Ticks.ToString() + "/";
-            Directory.CreateDirectory(path);
             t.Stop();
             Console.WriteLine(t.Elapsed);
+            string path = Paths.ExperimentsOutput + "ST_parser" + DateTime.Now.Ticks.ToString() + "/";
+            Directory.CreateDirectory(path);
+            
             t.Restart();
             for (int i = 0; i < images.Count; i++) {
                 ImageBWSaver.Save((images[i] as ImageBWWrapper), path + "A_" + i.ToString() + ".png");
