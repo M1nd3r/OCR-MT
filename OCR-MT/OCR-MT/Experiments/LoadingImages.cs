@@ -133,13 +133,19 @@ namespace OCR_MT.Experiments {
             }
             t.Start();
             images = new List<IImage<byte>>(loader5.Load(paths));
-            string path = Paths.ExperimentsOutput + "MT2_parser" + DateTime.Now.Ticks.ToString() + "/";
+            string path = Paths.ExperimentsOutput + "ST_parser" + DateTime.Now.Ticks.ToString() + "/";
             Directory.CreateDirectory(path);
             t.Stop();
             Console.WriteLine(t.Elapsed);
             t.Restart();
             for (int i = 0; i < images.Count; i++) {
-                ImageBWSaver.SaveMatrixBW(images[i], path + i.ToString() + ".png");
+                ImageBWSaver.Save((images[i] as ImageBWWrapper), path + "A_" + i.ToString() + ".png");
+            }
+            t.Stop();
+            Console.WriteLine(t.Elapsed);
+            t.Restart();
+            for (int i = 0; i < images.Count; i++) {
+                ImageBWSaver.Save((images[i]), path + "B_" + i.ToString() + ".png");
             }
             t.Stop();
             Console.WriteLine(t.Elapsed);

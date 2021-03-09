@@ -6,7 +6,7 @@ using SixLabors.ImageSharp.PixelFormats;
 
 namespace OCR_MT.IO {
     class ImageBWSaver {
-        public static void SaveMatrixBW(IImage<byte> m,string path) {
+        public static void Save(IImage<byte> m,string path) {
             Image<Rgba32> img = new Image<Rgba32>(m.Width, m.Height, Rgba32.ParseHex("ffffffff"));
             for (int x = 0; x < m.Width; x++) {
                 for (int y = 0; y < m.Height; y++) {
@@ -15,6 +15,9 @@ namespace OCR_MT.IO {
                 }
             }
             img.Save(path);
+        }
+        public static void Save(ImageBWWrapper img, string path) {            
+            ImageBWWrapperHandler.Save(img,path);
         }
     }
 }

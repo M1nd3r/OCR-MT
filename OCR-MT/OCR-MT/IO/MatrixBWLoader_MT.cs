@@ -91,7 +91,7 @@ namespace OCR_MT.IO {
 
                 lock (_lockLoad) {
                     logger.Out(nameof(MatrixBWLoader_MT<T>) + "." + nameof(Task) + ": " + nameof(_lockLoad)+" granted");
-                    _images[GetIndex()] =  ImageBWWrapper.Load(_paths[_indices[GetIndex()]]);
+                    _images[GetIndex()] =  ImageBWWrapperHandler.Load(_paths[_indices[GetIndex()]]);
                 }
                 logger.Out(nameof(MatrixBWLoader_MT<T>) + "." + nameof(Task) + ": " + nameof(_lockLoad) + " released");
                 _loadedMatrices[_indices[GetIndex()]] = _parser.Parse(_images[GetIndex()]);                
