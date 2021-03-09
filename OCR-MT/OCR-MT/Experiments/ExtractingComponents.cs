@@ -9,7 +9,7 @@ using OCR_MT.IO;
 namespace OCR_MT.Experiments {
     internal static class ExtractingComponents {
         internal static void TestCreation() {
-            IComponent<byte> c = ComponentBW_byte.Create();
+            // IComponent<byte> c =new ComponentBW_byte;
         }
     }
 }
