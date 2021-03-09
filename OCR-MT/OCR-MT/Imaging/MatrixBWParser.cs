@@ -1,7 +1,7 @@
 ﻿using OCR_MT.Core;
 
 namespace OCR_MT.Imaging {
-    class MatrixBWParser : IMatrixBWParser<byte> {
+    class MatrixBWParser : IParser<IImage<byte>, MatrixBW> {
         public MatrixBW Parse(IImage<byte> image) {
             var m = new MatrixBW(image.Width, image.Height);
             for (int x = 0; x < image.Width; x++) {

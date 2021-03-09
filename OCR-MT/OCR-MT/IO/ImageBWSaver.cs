@@ -1,11 +1,12 @@
 ﻿using OCR_MT.Core;
+using OCR_MT.Imaging;
 using static OCR_MT.Utils.Constants;
 using SixLabors.ImageSharp;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace OCR_MT.IO {
-    class MatrixBWSaver {
-        public static void SaveMatrixBW(MatrixBW m,string path) {
+    class ImageBWSaver {
+        public static void SaveMatrixBW(IImage<byte> m,string path) {
             Image<Rgba32> img = new Image<Rgba32>(m.Width, m.Height, Rgba32.ParseHex("ffffffff"));
             for (int x = 0; x < m.Width; x++) {
                 for (int y = 0; y < m.Height; y++) {

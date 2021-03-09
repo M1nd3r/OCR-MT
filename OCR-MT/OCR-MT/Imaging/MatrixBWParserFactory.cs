@@ -1,6 +1,7 @@
-﻿namespace OCR_MT.Imaging {
+﻿using OCR_MT.Core;
+namespace OCR_MT.Imaging {
     class MatrixBWParserFactory {
-        public static IMatrixBWParser<byte> GetParser() => new MatrixBWParser();        
-        public static IMatrixBWParser<byte> GetParserMT() => new MatrixBWParser_MT();
+        public static IParser<IImage<byte>, MatrixBW> GetParser() => new MatrixBWParser();        
+        public static IParser<IImage<byte>, MatrixBW> GetParserMT() => new MatrixBWParser_MT();
     }
 }

@@ -65,8 +65,8 @@ namespace OCR_MT.Experiments {
             Console.WriteLine(t.Elapsed);
             Console.WriteLine("--------------");
         }
-                
-        public static void TestIS_MT3(int pages=50) {
+
+        public static void TestIS_MT3(int pages = 50) {
             Console.WriteLine("IS_MT3:");
             MatrixBWLoader_MT<MatrixBWParser_MT> loader5 = new MatrixBWLoader_MT<MatrixBWParser_MT>(new MatrixBWParser_MT());
             Stopwatch t = new Stopwatch();
@@ -93,13 +93,53 @@ namespace OCR_MT.Experiments {
             }
             t.Start();
             images = new List<MatrixBW>(loader5.Load(paths));
-            string path = Paths.ExperimentsOutput +"MT2_parser"+ DateTime.Now.Ticks.ToString() + "/";
+            string path = Paths.ExperimentsOutput + "MT2_parser" + DateTime.Now.Ticks.ToString() + "/";
             Directory.CreateDirectory(path);
             t.Stop();
             Console.WriteLine(t.Elapsed);
             t.Restart();
             for (int i = 0; i < images.Count; i++) {
-                MatrixBWSaver.SaveMatrixBW(images[i], path + i.ToString() + ".png");
+                //MatrixBWSaver.SaveMatrixBW(images[i], path + i.ToString() + ".png");
+            }
+            t.Stop();
+            Console.WriteLine(t.Elapsed);
+            Console.WriteLine("--------------");
+        }
+
+        public static void TestIS_ST(int pages = 50) {
+            Console.WriteLine("IS_MT3:");
+            ImageBWLoader loader5 = new ImageBWLoader(ImageBWParserFactory.GetParser());
+            Stopwatch t = new Stopwatch();
+
+            t.Start();
+            IImage<byte> image = loader5.Load(@"D:\MFF\04-LS-2\C#\OCR\images\JakobeiBW\Jakobei_Convert_010.png");
+            t.Stop();
+            Console.WriteLine(t.Elapsed);
+            t.Reset();
+
+            t.Start();
+            ImageBWLoader loader4 = new ImageBWLoader(ImageBWParserFactory.GetParser());
+            IImage<byte> image4 = loader4.Load(@"D:\MFF\04-LS-2\C#\OCR\images\JakobeiBW\Jakobei_Convert_011.png");
+            t.Stop();
+            Console.WriteLine(t.Elapsed);
+            t.Reset();
+            List<IImage<byte>> images;
+            List<string> paths = new List<string>();
+            for (int i = 0; i < pages; i++) {
+                var s = "";
+                if (i + 10 < 100)
+                    s = "0";
+                paths.Add(@"D:\MFF\04-LS-2\C#\OCR\images\JakobeiBW\Jakobei_Convert_" + s + (i + 10).ToString() + ".png");
+            }
+            t.Start();
+            images = new List<IImage<byte>>(loader5.Load(paths));
+            string path = Paths.ExperimentsOutput + "MT2_parser" + DateTime.Now.Ticks.ToString() + "/";
+            Directory.CreateDirectory(path);
+            t.Stop();
+            Console.WriteLine(t.Elapsed);
+            t.Restart();
+            for (int i = 0; i < images.Count; i++) {
+                ImageBWSaver.SaveMatrixBW(images[i], path + i.ToString() + ".png");
             }
             t.Stop();
             Console.WriteLine(t.Elapsed);

@@ -18,9 +18,14 @@ namespace OCR_MT {
             //Dependency Inversion Principle
             ThreadManager tm = ThreadManager.GetThreadManager();
             logger.Out(tm.ThreadsAvailable().ToString());
-            LoadingImages.TestIS_MT3(10);
-            //LoadingImages.TestIS(500);
-            LoadingImages.TestIS2(500);
+
+            LoadingImages.TestIS_ST(50);
+
+            LoadingImages.TestIS2(50);
+
+            LoadingImages.TestIS_MT3(50);
+
+            LoadingImages.TestIS(50);
 
             Out(Environment.ProcessorCount.ToString());
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("cs");

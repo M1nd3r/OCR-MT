@@ -5,15 +5,14 @@ using System.Collections.Generic;
 using System.Threading;
 using OCR_MT.Core;
 using OCR_MT.Utils;
-using SixLabors.ImageSharp.PixelFormats;
 using OCR_MT.Logging;
 
 
 namespace OCR_MT.IO {
-    class MatrixBWLoader_MT<T> : IMatrixBWLoader where T : IMatrixBWParser<byte>, IMultiThread, IDisposable {
+    class MatrixBWLoader_MT<T> : IMatrixBWLoader where T : IParser<IImage<byte>, MatrixBW>, IMultiThread, IDisposable {
         ILogger logger = LoggerFactory.GetLogger();
 
-        private IMatrixBWParser<byte> _parser;
+        private IParser<IImage<byte>, MatrixBW> _parser;
         private ThreadManager _tm;
         private Dictionary<int, int> _thDic;
         private static object
@@ -92,7 +91,7 @@ namespace OCR_MT.IO {
 
                 lock (_lockLoad) {
                     logger.Out(nameof(MatrixBWLoader_MT<T>) + "." + nameof(Task) + ": " + nameof(_lockLoad)+" granted");
-                    _images[GetIndex()] = new ImageBWWrapper_byte(SixLabors.ImageSharp.Image.Load<Rgba32>(_paths[_indices[GetIndex()]]));
+                    _images[GetIndex()] =  ImageBWWrapper.Load(_paths[_indices[GetIndex()]]);
                 }
                 logger.Out(nameof(MatrixBWLoader_MT<T>) + "." + nameof(Task) + ": " + nameof(_lockLoad) + " released");
                 _loadedMatrices[_indices[GetIndex()]] = _parser.Parse(_images[GetIndex()]);                

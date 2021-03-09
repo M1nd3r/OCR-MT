@@ -8,7 +8,7 @@ using OCR_MT.Logging;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace OCR_MT.Imaging {
-    class MatrixBWParser_MT : IMatrixBWParser<byte>, IMultiThread, IDisposable {
+    class MatrixBWParser_MT : IParser<IImage<byte>, MatrixBW>, IMultiThread, IDisposable {
         private ILogger logger = LoggerFactory.GetLogger();
         private int _index;
         public MatrixBWParser_MT() {

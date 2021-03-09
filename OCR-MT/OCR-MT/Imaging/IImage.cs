@@ -2,10 +2,6 @@
     interface IImage<T> {
         public int Width { get; }
         public int Height { get; }
-        public T this[int x, int y] { get; }           
-        
+        public T this[int x, int y] { get; }
     }
-    interface BW {
-        public byte Intensity { get; }
-    }    
 }
