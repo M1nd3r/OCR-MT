@@ -8,16 +8,18 @@ using OCR_MT.IO;
 using OCR_MT.Extraction;
 using OCR_MT.Imaging;
 using static OCR_MT.Utils.Constants;
+using System.IO;
 
 namespace OCR_MT.Experiments {
     internal static class ExtractingComponents {
         internal static void TestCreation(int pages=3) {
-            ComponentBWExtractor ce = new ComponentBWExtractor();
+            ComponentBWExtractor ce = new ComponentBWExtractor(); //Extractor
+
             System.Diagnostics.Stopwatch t = new System.Diagnostics.Stopwatch();
             ImageBWLoader loader5 = new ImageBWLoader(ImageBWParserFactory.GetParser());
             List<IImage<byte>> images;
             List<string> paths = new List<string>();
-            paths.Add(Paths.ExperimentsInput + "b3.png");
+            paths.Add(Paths.Experiments.Input + "b3.png");
             for (int i = 0; i < pages; i++) {
                 var s = "";
                 if (i + 10 < 100)
@@ -27,7 +29,7 @@ namespace OCR_MT.Experiments {
             t.Start();
 
             images = new List<IImage<byte>>(loader5.Load(paths));
-            var a = ce.Extract(images[1], Colors.Black_byte);
+            var a = ce.Extract(images[1], Colors.Black_byte, Path.GetFileName(paths[1])); //Extract black components from image 
 
             t.Stop();
             Console.WriteLine(t.Elapsed);

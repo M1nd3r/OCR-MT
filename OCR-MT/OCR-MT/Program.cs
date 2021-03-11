@@ -5,6 +5,7 @@ using OCR_MT.Localisation;
 using OCR_MT.Experiments;
 using OCR_MT.MT;
 using OCR_MT.Logging;
+using System.Runtime;
 
 namespace OCR_MT {
     class Program {
@@ -16,9 +17,13 @@ namespace OCR_MT {
             //Liskov substitution Principle
             //Interface Segregation Principle
             //Dependency Inversion Principle
+
             ThreadManager tm = ThreadManager.GetThreadManager();
             logger.Out(tm.ThreadsAvailable().ToString());
 
+            PageTesting.CreateAndSave_MT(10,19);
+
+            /*
             ExtractingComponents.TestCreation();
             LoadingImages.TestIS_ST(50);
 
@@ -31,9 +36,7 @@ namespace OCR_MT {
             Out(Environment.ProcessorCount.ToString());
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("cs");
             Console.WriteLine(Strings.Welcome + ", " + Environment.UserName);
-        }
-        static void Out(string s) {
-            Console.WriteLine(s);
+            */
         }
     }
 }

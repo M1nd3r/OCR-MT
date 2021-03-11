@@ -93,7 +93,7 @@ namespace OCR_MT.Experiments {
             }
             t.Start();
             images = new List<MatrixBW>(loader5.Load(paths));
-            string path = Paths.ExperimentsOutput + "MT2_parser" + DateTime.Now.Ticks.ToString() + "/";
+            string path = Paths.Experiments.Output + "MT2_parser" + DateTime.Now.Ticks.ToString() + "/";
             Directory.CreateDirectory(path);
             t.Stop();
             Console.WriteLine(t.Elapsed);
@@ -135,7 +135,7 @@ namespace OCR_MT.Experiments {
             images = new List<IImage<byte>>(loader5.Load(paths));
             t.Stop();
             Console.WriteLine(t.Elapsed);
-            string path = Paths.ExperimentsOutput + "ST_parser" + DateTime.Now.Ticks.ToString() + "/";
+            string path = Paths.Experiments.Output + "ST_parser" + DateTime.Now.Ticks.ToString() + "/";
             Directory.CreateDirectory(path);
             
             t.Restart();
