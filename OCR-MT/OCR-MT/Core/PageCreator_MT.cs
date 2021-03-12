@@ -20,9 +20,6 @@ namespace OCR_MT.Core {
         private IList<string> _paths;
         private bool[] _inProgress;
         private int _pageStartID;
-        
-        //Added for test _iml
-        //private IMatrixBWLoader[] _iml;
 
         private Dictionary<int, int> _thDic;
         private static object
@@ -60,8 +57,6 @@ namespace OCR_MT.Core {
             _images = new IImage<byte>[numberOfThreads];
             _pageStartID = PageFactory.GetCounter;
 
-            //Added for test _iml
-            //_iml = new IMatrixBWLoader[numberOfThreads];
 
 
             Thread[] pool = new Thread[numberOfThreads];
@@ -89,7 +84,6 @@ namespace OCR_MT.Core {
                 }
                 
                 _images[GetIndex()] = ImageBWWrapperHandler.Load(_paths[_indices[GetIndex()]]); 
-                //_images[GetIndex()] = _iml[GetIndex()].Load(_paths[_indices[GetIndex()]]);
 
 
                 if (_indices[GetIndex()] % 20 == 0) {
@@ -107,7 +101,6 @@ namespace OCR_MT.Core {
             lock (_lockInit) {
                 _thDic.Add(Thread.CurrentThread.ManagedThreadId, _index++);
                 _pageFactories[GetIndex()] = new PageFactory_MT(); //Hmmm, this could be done better
-                //_iml[GetIndex()] = new MatrixBWLoaderIS();
             }
         }
         public bool GetNextJob(out int i) {
