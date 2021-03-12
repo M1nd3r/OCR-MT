@@ -9,6 +9,7 @@ using System.Threading;
 using OCR_MT.Utils;
 using OCR_MT.Imaging;
 using System.Runtime;
+using OCR_MT.IO;
 
 namespace OCR_MT.Core {
     class PageCreator_MT {
@@ -19,6 +20,9 @@ namespace OCR_MT.Core {
         private IList<string> _paths;
         private bool[] _inProgress;
         private int _pageStartID;
+        
+        //Added for test _iml
+        //private IMatrixBWLoader[] _iml;
 
         private Dictionary<int, int> _thDic;
         private static object
@@ -42,6 +46,7 @@ namespace OCR_MT.Core {
             _inProgress = new bool[paths.Count];
             _inProgress.SetAllToFalse();
 
+
             int
                 size = paths.Count,
                 available = _tm.ThreadsAvailable(),
@@ -54,6 +59,10 @@ namespace OCR_MT.Core {
             _pageFactories = new PageFactory_MT[numberOfThreads];
             _images = new IImage<byte>[numberOfThreads];
             _pageStartID = PageFactory.GetCounter;
+
+            //Added for test _iml
+            //_iml = new IMatrixBWLoader[numberOfThreads];
+
 
             Thread[] pool = new Thread[numberOfThreads];
             for (int i = 0; i < numberOfThreads; i++) {
@@ -78,8 +87,10 @@ namespace OCR_MT.Core {
                         return;
                     }
                 }
-                    _images[GetIndex()] = ImageBWWrapperHandler.Load(_paths[_indices[GetIndex()]]);
                 
+                _images[GetIndex()] = ImageBWWrapperHandler.Load(_paths[_indices[GetIndex()]]); 
+                //_images[GetIndex()] = _iml[GetIndex()].Load(_paths[_indices[GetIndex()]]);
+
 
                 if (_indices[GetIndex()] % 20 == 0) {
                     GCSettings.LargeObjectHeapCompactionMode = GCLargeObjectHeapCompactionMode.CompactOnce;
@@ -96,6 +107,7 @@ namespace OCR_MT.Core {
             lock (_lockInit) {
                 _thDic.Add(Thread.CurrentThread.ManagedThreadId, _index++);
                 _pageFactories[GetIndex()] = new PageFactory_MT(); //Hmmm, this could be done better
+                //_iml[GetIndex()] = new MatrixBWLoaderIS();
             }
         }
         public bool GetNextJob(out int i) {

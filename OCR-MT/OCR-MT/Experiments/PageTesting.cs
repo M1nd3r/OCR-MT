@@ -51,15 +51,17 @@ namespace OCR_MT.Experiments {
             logger.Out(nameof(PageTesting) + "." + nameof(CreateAndSave) + " - Starting multithread creation");
             PageCreator_MT pcmt = new PageCreator_MT();
             pages = pcmt.Create(paths);
-            for (int i = 0; i < pages.Length; i++) {
-                logger.Out(("page "+i+": "+Utils.Testing.GetSizeOfObject(pages[i].Components)+"B").ToString());
-            }
+
+            t.Stop();
+            logger.Out(nameof(PageTesting) + "." + nameof(CreateAndSave) + " - Total time: " + t.Elapsed);
+            /*
             Parallel.For(0, pages.Length, i => {
                 logger.Out(nameof(PageTesting) + "." + nameof(CreateAndSave) + " - Saving page: " + (i + 1) + " / " + pages.Length);
                 PageSaverFactory.Get().Save(pages[i], Paths.Experiments.OutputPages + pages[i].ID + "_reconstructed_MT.png");
             });
             t.Stop();
             logger.Out(nameof(PageTesting) + "." + nameof(CreateAndSave) + " - Total time: " + t.Elapsed);
+            */
         }
     }
 }

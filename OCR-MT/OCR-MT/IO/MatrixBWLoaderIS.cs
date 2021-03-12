@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using OCR_MT.Core;
+using OCR_MT.Imaging;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace OCR_MT.IO {

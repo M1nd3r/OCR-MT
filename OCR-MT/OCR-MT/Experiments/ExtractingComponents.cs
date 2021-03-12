@@ -13,7 +13,7 @@ using System.IO;
 namespace OCR_MT.Experiments {
     internal static class ExtractingComponents {
         internal static void TestCreation(int pages=3) {
-            ComponentBWExtractor ce = new ComponentBWExtractor(); //Extractor
+            ComponentBWExtractorFast ce = new ComponentBWExtractorFast(); //Extractor
 
             System.Diagnostics.Stopwatch t = new System.Diagnostics.Stopwatch();
             ImageBWLoader loader5 = new ImageBWLoader(ImageBWParserFactory.GetParser());

@@ -16,7 +16,7 @@ namespace OCR_MT.Core {
                 throw new ArgumentNullException(nameof(img));
             }
             IList<IComponent<byte>> components = new List<IComponent<byte>>();
-            ComponentBWExtractor ce = new ComponentBWExtractor();
+            ComponentBWExtractorFast ce = new ComponentBWExtractorFast();
             components = ce.Extract(img, Colors.Black_byte,(_pageCounter+1).ToString());
             return new Page(_pageCounter++, components, img.Width, img.Height);            
         }
@@ -28,7 +28,7 @@ namespace OCR_MT.Core {
                 throw new ArgumentNullException(nameof(img));
             }
             IList<IComponent<byte>> components = new List<IComponent<byte>>();
-            ComponentBWExtractor ce = new ComponentBWExtractor();
+            ComponentBWExtractorFast ce = new ComponentBWExtractorFast();
             components = ce.Extract(img, Colors.Black_byte,ID.ToString());
             return new Page(ID, components, img.Width, img.Height);
         }

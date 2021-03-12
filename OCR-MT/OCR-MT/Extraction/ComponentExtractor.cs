@@ -6,6 +6,21 @@ using System.IO;
 using static OCR_MT.Utils.Constants;
 
 namespace OCR_MT.Extraction {
+    abstract class ComponentExtractorFast<T> {
+        protected ComponentFactory<T> _cf;
+        protected Wave_byteFast _wave;
+        public virtual IList<IComponent<T>> Extract(IImage<T> img, T target, string ID) {
+            IList<IComponent<T>> c = new List<IComponent<T>>();
+            var path = Paths.Experiments.Output + "Components/";
+            Directory.CreateDirectory(path);
+            //IO.ImageBWSaver.Save(img as IImage<byte>, path + "page_" + ID + Suffixes.Png);
+            while (_wave.GetNext(out IList<(int, int)> list)) {
+                c.Add(_cf.CreateComponent(list));
+                //IO.ImageBWSaver.Save(c[c.Count - 1] as IImage<byte>, path + ID + "_" + c.Count.ToString() + Suffixes.Png);
+            }
+            return c;
+        }
+    }
     abstract class ComponentExtractorSingle<T> {
         protected ComponentFactory<T> _cf;
         protected WaveSingleTarget<T> _wave;
@@ -13,10 +28,10 @@ namespace OCR_MT.Extraction {
             IList<IComponent<T>> c = new List<IComponent<T>>();
             var path = Paths.Experiments.Output + "Components/";
             Directory.CreateDirectory(path);
-            IO.ImageBWSaver.Save(img as IImage<byte>, path+"page_"+ID+Suffixes.Png);
+            //IO.ImageBWSaver.Save(img as IImage<byte>, path+"page_"+ID+Suffixes.Png);
             while (_wave.GetNext(out Queue<(int,int)> q)) {
                 c.Add(_cf.CreateComponent(q));
-                IO.ImageBWSaver.Save(c[c.Count - 1] as IImage<byte>, path+ID +"_"+ c.Count.ToString() + Suffixes.Png);
+                //IO.ImageBWSaver.Save(c[c.Count - 1] as IImage<byte>, path+ID +"_"+ c.Count.ToString() + Suffixes.Png);
             }
             return c;
         }
@@ -24,6 +39,13 @@ namespace OCR_MT.Extraction {
     class ComponentBWExtractor : ComponentExtractorSingle<byte> {        
         public override IList<IComponent<byte>> Extract(IImage<byte> img, byte target, string ID) {
             _wave = new Wave_byte(img, target);
+            _cf = ComponentFactory.Get(target);
+            return base.Extract(img, target, ID);
+        }
+    }
+    class ComponentBWExtractorFast : ComponentExtractorFast<byte> {
+        public override IList<IComponent<byte>> Extract(IImage<byte> img, byte target, string ID) {
+            _wave = new Wave_byteFast(img, target);
             _cf = ComponentFactory.Get(target);
             return base.Extract(img, target, ID);
         }

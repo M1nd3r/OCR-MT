@@ -21,7 +21,7 @@ namespace OCR_MT {
             ThreadManager tm = ThreadManager.GetThreadManager();
             logger.Out(tm.ThreadsAvailable().ToString());
 
-            PageTesting.CreateAndSave_MT(10,19);
+            PageTesting.CreateAndSave_MT(10,509);
 
             /*
             ExtractingComponents.TestCreation();
