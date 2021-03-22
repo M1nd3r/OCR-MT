@@ -50,4 +50,8 @@
     </Compile>
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="IO\Database\" />
+  </ItemGroup>
+
 </Project>
