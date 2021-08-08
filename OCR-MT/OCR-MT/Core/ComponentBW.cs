@@ -9,7 +9,7 @@ namespace OCR_MT.Core {
         protected IList<(int X, int Y)> _coords;
         public ComponentBW(int ID) {
             _coords = new List<(int X, int Y)>();
-            this.ID = ID;
+            this.ComponentID = ID;
             this.MinX = int.MaxValue;
             this.MinY = int.MaxValue;
             
@@ -35,7 +35,7 @@ namespace OCR_MT.Core {
 
         public abstract T this[int x, int y] { get; protected set; }
 
-        public int ID { get; }
+        public int ComponentID { get; }
 
         public int Width { get; protected set; }
 
@@ -70,7 +70,10 @@ namespace OCR_MT.Core {
         }
         public MatrixBW Matrix { get; protected set; }
 
-        public override byte this[int x, int y] { get => Matrix[x, y]; protected set => Matrix[x, y] = value; }
+        public override byte this[int x, int y] { 
+            get => Matrix[x, y]; 
+            protected set => Matrix[x, y] = value; 
+        }
 
         public virtual void Finish() {
             long sumX = 0, sumY = 0;
@@ -98,7 +101,10 @@ namespace OCR_MT.Core {
             Finish();
         }
         public MatrixBit Matrix { get; protected set; }
-        public override byte this[int x, int y] { get => (Matrix[x, y]) ? Colors.Black_byte : Colors.White_byte; protected set => Matrix[x, y] = (value == Colors.Black_byte); }
+        public override byte this[int x, int y] { 
+            get => (Matrix[x, y]) ? Colors.Black_byte : Colors.White_byte; 
+            protected set => Matrix[x, y] = (value == Colors.Black_byte); 
+        }
 
         public virtual void Finish() {
             long sumX = 0, sumY = 0;

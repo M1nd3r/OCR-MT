@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OCR_MT.Core {
     internal interface IComponent {
-        public int ID { get; }
+        public int ComponentID { get; }
         public int Width { get; }
         public int Height { get; }
         public int MaxX { get; }

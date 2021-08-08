@@ -75,4 +75,11 @@ namespace OCR_MT.Core {
             set => field[x, y] = (value == Colors.Black_byte || value == Colors.White_byte) ? value : field[x, y];
         }
     }
+    internal class MatrixBWR : Matrix<byte>, Imaging.IImage<byte> {
+        public MatrixBWR(int width, int height) : base(width, height) { }
+        public override byte this[int x, int y] {
+            get => field[x, y];
+            set => field[x, y] = (value == Colors.Black_byte || value == Colors.White_byte||value==Colors.Red_byte) ? value : field[x, y];
+        }
+    }
 }
