@@ -24,7 +24,7 @@ namespace OCR_MT.Core {
         public IPage<byte> Create() {
 
             IList<IComponent<byte>> components = new List<IComponent<byte>>();
-            ComponentBWExtractorFast ce = new ComponentBWExtractorFast();
+            ComponentBWExtractor ce = new ComponentBWExtractor();
             components = ce.Extract(_img, Colors.Black_byte, (_pageCounter + 1).ToString());
             return new Page(_pageCounter++, components, _img.Width, _img.Height);
         }
@@ -34,7 +34,7 @@ namespace OCR_MT.Core {
         public IPage<byte> Create(int ID) {
             _pageCounter++;
             IList<IComponent<byte>> components = new List<IComponent<byte>>();
-            ComponentBWExtractorFast ce = new ComponentBWExtractorFast();
+            ComponentBWExtractor ce = new ComponentBWExtractor();
             components = ce.Extract(_img, Colors.Black_byte, ID.ToString());
             return new Page(ID, components, _img.Width, _img.Height);
         }

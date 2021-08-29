@@ -13,10 +13,6 @@ namespace OCR_MT.Core {
             this.MinY = int.MaxValue;
             
         }
-        public ComponentBW(Queue<(int, int)> q, int ID):this(ID) {
-            while (q.Count > 0)
-                AddPixel(q.Dequeue());
-        }
         public ComponentBW(IList<(int X, int Y)> coords, int ID) : this(ID) {
             _coords = coords;
             Pixels = coords.Count;
@@ -47,23 +43,9 @@ namespace OCR_MT.Core {
         public float CentroidX { get; protected set; }
         public float CentroidY { get; protected set; }
         public long Pixels { get; protected set; }
-        protected void AddPixel((int X, int Y) coord) {
-            _coords.Add(coord);
-            Pixels++;
-            if (coord.X < MinX)
-                MinX = coord.X;
-            if (coord.X > MaxX)
-                MaxX = coord.X;
-            if (coord.Y < MinY)
-                MinY = coord.Y;
-            if (coord.Y > MaxY)
-                MaxY = coord.Y;
-        }
     }
     internal class ComponentBW_byte : ComponentBW<byte> {
-        public ComponentBW_byte(Queue<(int, int)> q, int ID) : base(q, ID) {
-            Finish();
-        }
+
         public ComponentBW_byte(IList<(int, int)> list, int ID) : base(list, ID) {
             Finish();
         }
@@ -93,9 +75,7 @@ namespace OCR_MT.Core {
         }
     }
     internal class ComponentBW_bit : ComponentBW<byte> {
-        public ComponentBW_bit(Queue<(int, int)> q, int ID) : base(q, ID) {
-            Finish();
-        }
+
         public ComponentBW_bit(IList<(int, int)> list, int ID) : base(list, ID) {
             Finish();
         }

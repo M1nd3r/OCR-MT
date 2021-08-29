@@ -14,7 +14,7 @@ using System.Diagnostics;
 namespace OCR_MT.Experiments {
     internal static class ExtractingComponents {
         internal static void TestCreation(int pages = 3) {
-            IComponentExtractor ce = new ComponentBWExtractorFast(); //Extractor
+            IComponentExtractor ce = new ComponentBWExtractor(); //Extractor
             Stopwatch t = new Stopwatch();
             IImageLoader<byte> loader5 = new ImageBWLoader(ImageBWParserFactory.GetParser());
             IList<IImage<byte>> images;

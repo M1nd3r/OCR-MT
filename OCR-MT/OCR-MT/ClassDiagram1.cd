@@ -94,7 +94,7 @@
   <Class Name="OCR_MT.Core.ComponentBW&lt;T&gt;">
     <Position X="81.25" Y="4" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>MAAAAAAwRAAAAIAACAABAGAAAAAAAAAAIAAAAAAAAAA=</HashCode>
+      <HashCode>MAAAAAAwRAAAAIAACAABAGAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\ComponentBW.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -217,33 +217,6 @@
       <FileName>Experiments\PageTesting.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OCR_MT.Extraction.ComponentExtractorFast&lt;T&gt;">
-    <Position X="86.25" Y="4" Width="4.5" />
-    <AssociationLine Name="_cf" Type="OCR_MT.Extraction.ComponentFactory&lt;T&gt;" ManuallyRouted="true">
-      <Path>
-        <Point X="87.344" Y="4" />
-        <Point X="87.344" Y="3.721" />
-        <Point X="82.458" Y="3.721" Type="JumpStart" />
-        <Point X="82.292" Y="3.721" Type="JumpEnd" />
-        <Point X="75.708" Y="3.721" Type="JumpStart" />
-        <Point X="75.542" Y="3.721" Type="JumpEnd" />
-        <Point X="68.083" Y="3.721" Type="JumpStart" />
-        <Point X="67.917" Y="3.721" Type="JumpEnd" />
-        <Point X="61.583" Y="3.721" Type="JumpStart" />
-        <Point X="61.417" Y="3.721" Type="JumpEnd" />
-        <Point X="54.031" Y="3.721" />
-        <Point X="54.031" Y="4" />
-      </Path>
-    </AssociationLine>
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAgAAAAABAAA=</HashCode>
-      <FileName>Extraction\ComponentExtractor.cs</FileName>
-    </TypeIdentifier>
-    <ShowAsAssociation>
-      <Field Name="_cf" />
-    </ShowAsAssociation>
-    <Lollipop Position="0.2" />
-  </Class>
   <Class Name="OCR_MT.Extraction.ComponentExtractorSingle&lt;T&gt;">
     <Position X="42" Y="4" Width="4.5" />
     <TypeIdentifier>
@@ -254,14 +227,6 @@
   </Class>
   <Class Name="OCR_MT.Extraction.ComponentBWExtractor">
     <Position X="41.75" Y="6.5" Width="5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Extraction\ComponentExtractor.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="OCR_MT.Extraction.ComponentBWExtractorFast">
-    <Position X="86" Y="6.25" Width="5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Extraction\ComponentExtractor.cs</FileName>
@@ -317,13 +282,6 @@
       <FileName>Extraction\Wave.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OCR_MT.Extraction.WaveMoreTargets&lt;T&gt;">
-    <Position X="33" Y="6.75" Width="3.25" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAIAAAAgAAAAAAA=</HashCode>
-      <FileName>Extraction\Wave.cs</FileName>
-    </TypeIdentifier>
-  </Class>
   <Class Name="OCR_MT.Extraction.Wave_byte">
     <Position X="28.25" Y="9.5" Width="4" />
     <NestedTypes>
@@ -336,13 +294,6 @@
     <TypeIdentifier>
       <HashCode>AAQAAAAEAAAAAgAAQAAgACAAAAAIAAIABBAAAACAAAA=</HashCode>
       <FileName>Extraction\Wave_byte.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="OCR_MT.Extraction.Wave_byteFast">
-    <Position X="37" Y="6.75" Width="4" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAQAAAAAAAQAAAAAIAAAAAAAAAAAA=</HashCode>
-      <FileName>Extraction\Wave_byteFast.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OCR_MT.Imaging.ImageBWParser" BaseTypeListCollapsed="true">

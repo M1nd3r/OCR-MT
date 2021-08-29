@@ -11,15 +11,15 @@ namespace OCR_MT.Extraction {
         public bool IncludeDiagonal { get => includeDiagonal; set => includeDiagonal = value; }
 
         public Wave_byte(IImage<byte> img, byte target) : base(img, target) { }
-        public override bool GetNext(out Queue<(int, int)> queue) {
-            queue = null;
+        public override bool GetNext(out IList<(int, int)> coords) {
+            coords = null;
             _positionsSolver = GetPositionsSolver();
             for (int y = _y; y < _img.Height; y++) {
                 for (int x = _x; x < _img.Width; x++) {
                     if (!_tested[x + 1, y + 1] && _img[x, y] == _target) {
                         _x = x;
                         _y = y;
-                        queue = SolveComponent(x, y);
+                        coords = SolveComponent(x, y);
                         _tested[x + 1, y + 1] = true;
                         return true;
                     }
@@ -33,15 +33,15 @@ namespace OCR_MT.Extraction {
                 return SolveAllPositions;
             return SolveBasicPositions;
         }
-        protected Queue<(int, int)> SolveComponent(int x, int y) {
+        protected IList<(int, int)> SolveComponent(int x, int y) {
             toEvaluate = new Queue<(int x, int y)>();
             toEvaluate.Enqueue((x, y));
             _tested[x + 1, y + 1] = true;
-            var q = new Queue<(int x, int y)>();
+            var q = new List<(int x, int y)>();
             while (toEvaluate.Count > 0) {
                 (int x, int y) t = toEvaluate.Dequeue();
                 if (_img[t.x, t.y] == _target) {
-                    q.Enqueue((t.x, t.y));
+                    q.Add((t.x, t.y));
                     _positionsSolver(x, y);
                 }
             }
