@@ -9,16 +9,16 @@ using OCR_MT.Extraction;
 using OCR_MT.Imaging;
 using static OCR_MT.Utils.Constants;
 using System.IO;
+using System.Diagnostics;
 
 namespace OCR_MT.Experiments {
     internal static class ExtractingComponents {
-        internal static void TestCreation(int pages=3) {
-            ComponentBWExtractorFast ce = new ComponentBWExtractorFast(); //Extractor
-
-            System.Diagnostics.Stopwatch t = new System.Diagnostics.Stopwatch();
-            ImageBWLoader loader5 = new ImageBWLoader(ImageBWParserFactory.GetParser());
-            List<IImage<byte>> images;
-            List<string> paths = new List<string>();
+        internal static void TestCreation(int pages = 3) {
+            IComponentExtractor ce = new ComponentBWExtractorFast(); //Extractor
+            Stopwatch t = new Stopwatch();
+            IImageLoader<byte> loader5 = new ImageBWLoader(ImageBWParserFactory.GetParser());
+            IList<IImage<byte>> images;
+            IList<string> paths = new List<string>();
             paths.Add(Paths.Experiments.Input + "b3.png");
             for (int i = 0; i < pages; i++) {
                 var s = "";

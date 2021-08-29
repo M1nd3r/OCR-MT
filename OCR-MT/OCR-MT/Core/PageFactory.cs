@@ -14,7 +14,7 @@ namespace OCR_MT.Core {
         protected static int _pageCounter = 1;
         protected readonly IImage<byte> _img;
         public PageFactory(IImage<byte> img) {
-            if (_img is null) {
+            if (img is null) {
                 throw new ArgumentNullException(nameof(_img));
             }
 
@@ -41,7 +41,6 @@ namespace OCR_MT.Core {
     }
     class PageFactoryLetters : IPageFactory<byte> {
         private readonly IPage _page;
-        private readonly int _width, _height;
         private readonly IList<IList<LetterComponentDist>> _arrangedComponents;
         private readonly DelegateFilter<LetterComponentDist> _filter;
         public PageFactoryLetters(IPage page, IList<IList<LetterComponentDist>> arrangedComponents, DelegateFilter<LetterComponentDist> filter) {

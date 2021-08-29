@@ -1,5 +1,4 @@
 ﻿using OCR_MT.Imaging;
-using System;
 using System.Collections.Generic;
 using static OCR_MT.Utils.Constants;
 using static OCR_MT.Utils.Extensions;

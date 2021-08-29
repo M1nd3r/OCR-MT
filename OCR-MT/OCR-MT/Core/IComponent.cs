@@ -15,7 +15,7 @@ namespace OCR_MT.Core {
         public float CentroidY { get; }
         public long Pixels { get; }
     }
-    internal interface IComponent<T> : IComponent {
+    internal interface IComponent<T> {
         public T this[int x, int y] { get; }
     }
 }

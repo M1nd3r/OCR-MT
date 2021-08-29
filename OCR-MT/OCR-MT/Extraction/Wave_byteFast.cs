@@ -1,9 +1,8 @@
 ﻿using OCR_MT.Imaging;
-using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+
+
+//REFACTOR
 
 namespace OCR_MT.Extraction {
     class Wave_byteFast :Wave<byte>{

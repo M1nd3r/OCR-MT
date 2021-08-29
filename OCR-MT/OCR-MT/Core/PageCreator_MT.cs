@@ -12,7 +12,7 @@ using System.Runtime;
 using OCR_MT.IO;
 
 namespace OCR_MT.Core {
-    class PageCreator_MT {
+    class PageCreator_MT:IPageCreator {
         private static ILogger logger = LoggerFactory.GetLogger();
         private ThreadManager _tm;
         private int _index;
@@ -102,7 +102,7 @@ namespace OCR_MT.Core {
                 _thDic.Add(Thread.CurrentThread.ManagedThreadId, _index++);
             }
         }
-        public bool GetNextJob(out int i) {
+        private bool GetNextJob(out int i) {
             lock (_lockNextPath) {
                 i = -1;
                 for (int y = 0; y < _inProgress.Length; y++) {

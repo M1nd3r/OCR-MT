@@ -23,10 +23,10 @@ namespace OCR_MT.Core.Identification {
         /// Returns height of the letter component
         /// </summary>
         public int Height => letter.Height;
-        public int MaxX => letter.MaxX;
-        public int MinX => letter.MinX;
-        public int MaxY => letter.MaxY;
-        public int MinY => letter.MinY;
+        public int MaxX => letter.MaxX + component.MinX;
+        public int MinX => component.MinX;
+        public int MaxY => letter.MaxY + component.MinY;
+        public int MinY => component.MinY;
         public float CentroidX => letter.CentroidX;
         public float CentroidY => letter.CentroidY;
         public long Pixels => letter.Pixels;
@@ -36,3 +36,5 @@ namespace OCR_MT.Core.Identification {
         public int ComponentID => component.ComponentID;
     }
 }
+
+

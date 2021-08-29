@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace OCR_MT.Core.Identification {
     interface ISorter {
@@ -11,5 +7,8 @@ namespace OCR_MT.Core.Identification {
     }
     interface ISorterWithAlphabet : ISorter {
         public IAlphabet GetAlphabet { get; }
+    }
+    interface ISorterPageSetable : ISorterWithAlphabet {
+        public void SetPage(in IPage<byte> page);
     }
 }

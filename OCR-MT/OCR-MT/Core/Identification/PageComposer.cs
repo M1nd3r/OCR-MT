@@ -15,8 +15,9 @@ namespace OCR_MT.Core.Identification {
                 throw new ArgumentNullException("Argument " + sorter.GetType().ToString() + " " + nameof(sorter) + " is null");
             if (alphabet == null)
                 throw new ArgumentNullException("Argument " + nameof(IAlphabet) + " " + nameof(alphabet) + " is null");
-            if (page == null)
-                throw new ArgumentNullException("Argument " + nameof(IPage<byte>) + " " + nameof(page) + " is null");
+            //if (page == null)
+            //    throw new ArgumentNullException("Argument " + nameof(IPage<byte>) + " " + nameof(page) + " is null");
+            //TODO fix for descendants
 
             _sorter = sorter;
             _alphabet = alphabet;
@@ -31,13 +32,9 @@ namespace OCR_MT.Core.Identification {
             : base(sorter, sorter.GetAlphabet, sorter.GetPage) {
             _delegateFilter = delegateFilter;
         }
-        public PageComposer(ISorter sorter, IAlphabet alphabet, IPage<byte> page, DelegateFilter<LetterComponentDist> delegateFilter = null)
-            : base(sorter, alphabet, page) {
-            _delegateFilter = delegateFilter;
-        }
-
         override public IPage<byte> Compose() {
             _sorter.Sort(out var sortedComponents);
+            _page = _sorter.GetPage; //TODO fix, does not make sense to do it this way
             return (new PageFactoryLetters(_page, sortedComponents, (_delegateFilter == null) ? (i => i) : _delegateFilter)).Create();
         }
     }

@@ -56,7 +56,7 @@
 
   <ItemGroup>
     <Folder Include="IO\Database\" />
-    <Folder Include="Core\Detection\" />
+    <Folder Include="Test\" />
   </ItemGroup>
 
 </Project>

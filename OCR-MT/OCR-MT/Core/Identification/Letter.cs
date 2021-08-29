@@ -7,6 +7,12 @@
     interface ILetter : ILetter<byte> { }
 
     internal abstract class Letter<T> : ILetter<T> {
+        public Letter(int ID, string translation, IComponent<T> component)
+        {
+            this.LetterID = ID;
+            this.Translation = translation;
+            this.LetterComponent = component;
+        }
         public int LetterID { get; protected set; }
         public string Translation { get; protected set; }
         public IComponent<T> LetterComponent { get; protected set; }
@@ -24,10 +30,7 @@
         public int ComponentID => LetterComponent.ComponentID;
     }
     class LetterBW : Letter<byte>, ILetter {
-        public LetterBW(int ID, string translation, IComponent<byte> component) {
-            this.LetterID = ID;
-            this.Translation = translation;
-            this.LetterComponent = component;
-        }
+        public LetterBW(int ID, string translation, IComponent<byte> component)
+            : base(ID, translation, component) { }          
     }
 }
