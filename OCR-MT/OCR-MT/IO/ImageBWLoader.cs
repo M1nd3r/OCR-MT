@@ -9,7 +9,7 @@ namespace OCR_MT.IO {
     class ImageBWLoader : IImageLoader<byte> {
         ILogger logger = LoggerFactory.GetLogger();
         IParser<Image<Rgba32>, IImage<byte>> parser;
-        public ImageBWLoader(IParser<Image<Rgba32>,IImage<byte>> parser) {
+        public ImageBWLoader(IParser<Image<Rgba32>, IImage<byte>> parser) {
             this.parser = parser;
         }
         public IImage<byte> Load(string path) => parser.Parse(Image.Load<Rgba32>(path));

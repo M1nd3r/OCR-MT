@@ -4,7 +4,7 @@ using System.Text;
 
 namespace OCR_MT.Core {
     internal interface IComponent {
-        public int ID { get; }
+        public int ComponentID { get; }
         public int Width { get; }
         public int Height { get; }
         public int MaxX { get; }
@@ -15,7 +15,7 @@ namespace OCR_MT.Core {
         public float CentroidY { get; }
         public long Pixels { get; }
     }
-    internal interface IComponent<T> : IComponent {
+    internal interface IComponent<T>:IComponent {
         public T this[int x, int y] { get; }
     }
 }

@@ -22,14 +22,6 @@ namespace OCR_MT.Extraction {
         public WaveSingleTarget(IImage<T> img, T target) : base(img) {
             _target = target;
         }
-        public abstract bool GetNext(out Queue<(int, int)> queue);        
+        public abstract bool GetNext(out IList<(int, int)> queue);        
     }
-    
-    abstract class WaveMoreTargets<T> : Wave<T> {
-        protected T[] _targets;
-        public WaveMoreTargets(IImage<T> img, T[] targets) : base(img) {
-            _targets = targets;
-        }
-        public abstract bool GetNext(out Queue<(int, int)> queue, out T targetValue);
-    }    
 }
