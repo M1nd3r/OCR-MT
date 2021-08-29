@@ -5,8 +5,8 @@ using OCR_MT.Utils;
 
 namespace OCR_MT.IO {
     class PageSaverBasic:IPageSaver<byte> {
-        private static ILogger logger = LoggerFactory.GetLogger();
-        public void Save(IPage<byte> page, string path) {
+        protected static ILogger logger = LoggerFactory.GetLogger();
+        public virtual void Save(IPage<byte> page, string path) {
             MatrixBW m = new MatrixBW(page.Width, page.Height);
             m.SetAllToMax();
             foreach (var component in page.Components) {

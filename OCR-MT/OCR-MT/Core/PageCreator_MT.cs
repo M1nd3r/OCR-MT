@@ -12,7 +12,7 @@ using System.Runtime;
 using OCR_MT.IO;
 
 namespace OCR_MT.Core {
-    class PageCreator_MT {
+    class PageCreator_MT:IPageCreator {
         private static ILogger logger = LoggerFactory.GetLogger();
         private ThreadManager _tm;
         private int _index;
@@ -82,8 +82,8 @@ namespace OCR_MT.Core {
                         return;
                     }
                 }
-                
-                _images[GetIndex()] = ImageBWWrapperHandler.Load(_paths[_indices[GetIndex()]]); 
+
+                _images[GetIndex()] = ImageBWWrapperHandler.Load(_paths[_indices[GetIndex()]]);
 
 
                 if (_indices[GetIndex()] % 20 == 0) {
@@ -92,18 +92,17 @@ namespace OCR_MT.Core {
                     logger.Out(nameof(PageCreator_MT) + "." + nameof(Task) + " - GC.LOH compacted");
                 }
                 logger.Out(nameof(PageCreator_MT) + "." + nameof(Task) + ": Next path = " + _indices[GetIndex()].ToString());
-                _pages[_indices[GetIndex()]] = _pageFactories[GetIndex()]
-                    .Create(_images[GetIndex()], _pageStartID + _indices[GetIndex()]);
+                _pageFactories[GetIndex()] = new PageFactory_MT(_images[GetIndex()]);
+                _pages[_indices[GetIndex()]] = _pageFactories[GetIndex()].Create(_pageStartID + _indices[GetIndex()]);
             }
 
         }
         private void InitializeThread() {
             lock (_lockInit) {
                 _thDic.Add(Thread.CurrentThread.ManagedThreadId, _index++);
-                _pageFactories[GetIndex()] = new PageFactory_MT(); //Hmmm, this could be done better
             }
         }
-        public bool GetNextJob(out int i) {
+        private bool GetNextJob(out int i) {
             lock (_lockNextPath) {
                 i = -1;
                 for (int y = 0; y < _inProgress.Length; y++) {
