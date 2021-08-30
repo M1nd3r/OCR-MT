@@ -1,6 +1,4 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Text;
 using OCR_MT.Core;
 
 namespace OCR_MT.Utils {
@@ -21,8 +19,8 @@ namespace OCR_MT.Utils {
                 arr[x] = true;
         }
         public static void SetFrameToTrueInsideToFalse(this bool[,] arr) {
-            for (int y = 1; y < arr.GetLength(1)-1; y++) {
-                for (int x = 1; x < arr.GetLength(0)-1; x++) {
+            for (int y = 1; y < arr.GetLength(1) - 1; y++) {
+                for (int x = 1; x < arr.GetLength(0) - 1; x++) {
                     arr[x, y] = false;
                 }
             }
@@ -175,6 +173,5 @@ namespace OCR_MT.Utils {
             }
         }
         public static double Distance(this (int x1, int y1) tuple, int x2, int y2) => Math.Sqrt(((tuple.x1 - x2) * (tuple.x1 - x2) + (tuple.y1 - y2) * (tuple.y1 - y2)));
-
     }
 }

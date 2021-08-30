@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using OCR_MT.Core;
+﻿using OCR_MT.Core;
 using OCR_MT.Imaging;
 
 namespace OCR_MT.IO {

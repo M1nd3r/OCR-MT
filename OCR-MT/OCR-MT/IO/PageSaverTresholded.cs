@@ -1,11 +1,6 @@
 ﻿using OCR_MT.Core;
 using OCR_MT.Core.Identification;
 using OCR_MT.Utils;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static OCR_MT.Utils.Delegates;
 using static OCR_MT.Utils.Constants.Colors;
 

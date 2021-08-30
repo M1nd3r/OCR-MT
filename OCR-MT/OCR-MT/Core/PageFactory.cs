@@ -3,9 +3,6 @@ using OCR_MT.Extraction;
 using OCR_MT.Imaging;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static OCR_MT.Utils.Constants;
 using static OCR_MT.Utils.Delegates;
 
@@ -17,7 +14,6 @@ namespace OCR_MT.Core {
             if (img is null) {
                 throw new ArgumentNullException(nameof(_img));
             }
-
             _img = img;
         }
         public static int GetCounter { get => _pageCounter; }
@@ -75,5 +71,4 @@ namespace OCR_MT.Core {
             return new Page(_page.ID, filteredComponentsList, _page.Width + widthAdd, _page.Height + heightAdd);
         }
     }
-
 }

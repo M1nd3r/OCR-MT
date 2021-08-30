@@ -1,7 +1,4 @@
-﻿using OCR_MT.Core;
-using System;
-using System.Collections.Generic;
-using System.Text;
+﻿using System.Collections.Generic;
 
 namespace OCR_MT.Core {
     internal interface IPage {
@@ -9,9 +6,7 @@ namespace OCR_MT.Core {
         public int Width { get; }
         public int Height { get; }
     }
-
     internal interface IPage<T> : IPage {
         public IList<IComponent<T>> Components { get; }
-
     }
 }

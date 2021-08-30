@@ -1,15 +1,11 @@
 ﻿using OCR_MT.MT;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using OCR_MT.Logging;
 using System.Threading;
 using OCR_MT.Utils;
 using OCR_MT.Imaging;
 using System.Runtime;
-using OCR_MT.IO;
 
 namespace OCR_MT.Core {
     class PageCreator_MT:IPageCreator {

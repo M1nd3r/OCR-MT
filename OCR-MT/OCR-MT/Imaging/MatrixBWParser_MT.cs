@@ -1,11 +1,7 @@
 ﻿using System;
 using OCR_MT.MT;
-using OCR_MT.Imaging;
-using System.Collections.Generic;
-using System.Threading;
 using OCR_MT.Core;
 using OCR_MT.Logging;
-using SixLabors.ImageSharp.PixelFormats;
 
 namespace OCR_MT.Imaging {
     class MatrixBWParser_MT : IParser<IImage<byte>, MatrixBW>, IMultiThread, IDisposable {

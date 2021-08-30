@@ -5,23 +5,13 @@ using OCR_MT.Localisation;
 using OCR_MT.Experiments;
 using OCR_MT.MT;
 using OCR_MT.Logging;
-using System.Runtime;
 using System.IO;
 
 namespace OCR_MT {
     class Program {
         private static ILogger logger = LoggerFactory.GetLogger();
         static void Main(string[] args) {
-   
-            var y = Directory.EnumerateDirectories(@"D:\GitHub\OCR-MT\abeceda\abeceda_Verne\");
 
-            foreach (var item in y) {
-                Console.WriteLine(item);
-                var files = Directory.EnumerateFiles(item);
-                foreach (var imageFile in files) {
-                    Console.WriteLine("___," + imageFile);
-                }
-            }
             //SOLID
             //Single Responsibility Principle
             //Open-Close Principle
@@ -29,14 +19,27 @@ namespace OCR_MT {
             //Interface Segregation Principle
             //Dependency Inversion Principle
 
+            WriteAlphabet();
+
             ThreadManager tm = ThreadManager.GetThreadManager();
             logger.Out(tm.ThreadsAvailable().ToString());
 
-            CreateAnalyseSave.Run();
+            CreateAnalyseSave.Run();            
+        }
+        private static void WriteAlphabet() {
+            var folders = Directory.EnumerateDirectories(@"D:\GitHub\OCR-MT\abeceda\abeceda_Verne\");
 
-            // PageTesting.CreateAndSave_MT(10,509);
-
-            /*
+            foreach (var folder in folders) {
+                Console.WriteLine(folder);
+                var files = Directory.EnumerateFiles(folder);
+                foreach (var imageFile in files) {
+                    Console.WriteLine("___," + imageFile);
+                }
+            }
+        }
+        private static void NotUsed() {
+             PageTesting.CreateAndSave_MT(10,509);
+            
             ExtractingComponents.TestCreation();
             LoadingImages.TestIS_ST(50);
 
@@ -46,10 +49,10 @@ namespace OCR_MT {
 
             LoadingImages.TestIS(50);
 
-            Out(Environment.ProcessorCount.ToString());
+            logger.Out(Environment.ProcessorCount.ToString());
             Thread.CurrentThread.CurrentUICulture = CultureInfo.GetCultureInfo("cs");
             Console.WriteLine(Strings.Welcome + ", " + Environment.UserName);
-            */
+            
         }
     }
 }

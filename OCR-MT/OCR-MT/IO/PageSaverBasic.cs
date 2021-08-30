@@ -1,23 +1,37 @@
 ﻿using OCR_MT.Core;
-using OCR_MT.IO;
 using OCR_MT.Logging;
 using OCR_MT.Utils;
 
 namespace OCR_MT.IO {
     class PageSaverBasic:IPageSaver<byte> {
         protected static ILogger logger = LoggerFactory.GetLogger();
+        private MatrixBW _matrix;
         public virtual void Save(IPage<byte> page, string path) {
-            MatrixBW m = new MatrixBW(page.Width, page.Height);
-            m.SetAllToMax();
+            InitializeMatrix(page);
             foreach (var component in page.Components) {
-                for (int y = 0; y < component.Height; y++) {
-                    for (int x = 0; x < component.Width; x++) {
-                        m[x + component.MinX, y + component.MinY] = component[x, y];
-                    }
+                DrawComponentIntoMatrix(component);
+            }
+            ImageBWSaver.Save(_matrix, path);
+            CleanAfterSave();
+            logger.Out(nameof(PageSaverBasic) + "." + nameof(Save) + ": Saved page (" + page.ID + ")");
+
+        }
+        private void DrawComponentIntoMatrix(IComponent<byte> component) {
+            for (int y = 0; y < component.Height; y++) {
+                for (int x = 0; x < component.Width; x++) {
+                    _matrix[x + component.MinX, y + component.MinY] = component[x, y];
                 }
             }
-            ImageBWSaver.Save(m, path);
-            logger.Out(nameof(PageSaverBasic) + "." + nameof(Save) + ": Saved page (" + page.ID + ")");
+        }
+        private void InitializeMatrix(IPage<byte> page) {
+            _matrix = new MatrixBW(page.Width, page.Height);
+            _matrix.SetAllToMax();
+        }
+        private void CleanAfterSave() {
+            SetMatrixToNull();
+        }
+        private void SetMatrixToNull() {
+            _matrix = null;
         }
     }
 }

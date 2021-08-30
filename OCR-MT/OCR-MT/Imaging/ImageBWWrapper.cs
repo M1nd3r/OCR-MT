@@ -19,8 +19,9 @@ namespace OCR_MT.Imaging {
     }
     class ImageBWWrapperHandler : ImageWrapper<Image<Rgba32>> {
         private ImageBWWrapperHandler(Image<Rgba32> image) : base(image) { }
-        public static ImageBWWrapper Load(string path)
-    => new ImageBWWrapper(Image.Load<Rgba32>(path));
+        public static ImageBWWrapper Load(string path) {
+            return new ImageBWWrapper(Image.Load<Rgba32>(path));
+        }
         public static void Save(ImageBWWrapper image, string path) {
             image.GetImage.Save(path);
         }

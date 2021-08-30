@@ -1,10 +1,9 @@
 ﻿using System.Collections.Generic;
 using OCR_MT.Core;
-using OCR_MT.Imaging;
 using SixLabors.ImageSharp.PixelFormats;
 
 namespace OCR_MT.IO {
-    class MatrixBWLoaderIS:IMatrixBWLoader {
+    class MatrixBWLoaderIS : IMatrixBWLoader {
         public MatrixBW Load(string path) {
             MatrixBW m;
             using (SixLabors.ImageSharp.Image<Rgba32> image = SixLabors.ImageSharp.Image.Load<Rgba32>(path)) {
@@ -25,10 +24,4 @@ namespace OCR_MT.IO {
             return r;
         }
     }
-
-    
-    
-
-    
-   
 }

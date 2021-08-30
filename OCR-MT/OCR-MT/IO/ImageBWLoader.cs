@@ -15,9 +15,9 @@ namespace OCR_MT.IO {
         public IImage<byte> Load(string path) => parser.Parse(Image.Load<Rgba32>(path));
         public IEnumerable<IImage<byte>> Load(ICollection<string> paths) {
             List<IImage<byte>> r = new List<IImage<byte>>();
-            int i = 0;
+            int counter = 0;
             foreach (var path in paths) {
-                logger.Out(nameof(ImageBWLoader) + "." + nameof(Load) + ": Loading image " + (++i).ToString() + " / " + paths.Count);
+                logger.Out(nameof(ImageBWLoader) + "." + nameof(Load) + ": Loading image " + (++counter).ToString() + " / " + paths.Count);
                 r.Add(Load(path));
             }
             return r;

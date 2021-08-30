@@ -1,8 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Text;
-
-namespace OCR_MT.Core {
+﻿namespace OCR_MT.Core {
     internal interface IComponent {
         public int ComponentID { get; }
         public int Width { get; }

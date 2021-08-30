@@ -1,5 +1,4 @@
-﻿
-using System.Threading;
+﻿using System.Threading;
 
 namespace OCR_MT.MT {
     interface IThreadManager {
