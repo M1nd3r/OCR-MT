@@ -1,6 +1,4 @@
 ﻿using OCR_MT.Core;
-using OCR_MT.Core.Identification;
-using OCR_MT.Imaging;
 using OCR_MT.IO;
 using OCR_MT.Logging;
 using System.Collections.Generic;
@@ -62,32 +60,6 @@ namespace OCR_MT.Experiments {
             t.Stop();
             logger.Out(nameof(PageTesting) + "." + nameof(CreateAndSave) + " - Total time: " + t.Elapsed);
             /**/
-        }
-        public static void CreateAndSave2(int min = 10, int max = 20) {
-            Directory.CreateDirectory(Paths.Experiments.OutputPages);
-            Directory.CreateDirectory(Paths.Experiments.InputPages);
-            List<string> paths = new List<string>();
-            paths = Paths.Experiments.Jakobei.Get(min, max);
-            var imageLoader = ImageLoaderFactory.GetLoader_byte();
-
-            Directory.CreateDirectory(Paths.Experiments.OutputPages);
-            Stopwatch t = new Stopwatch();
-
-            t.Start();
-            IPage<byte>[] pages = new IPage<byte>[paths.Count];
-
-            for (int i = 0; i < pages.Length; i++) {
-                logger.Out(nameof(PageTesting) + "." + nameof(CreateAndSave) + " - Creating page: " + (i + 1) + " / " + pages.Length);
-                var pagefactory = new PageFactory(imageLoader.Load(paths[i]));
-                pages[i] = pagefactory.Create();
-                PageComposer pc = new PageComposer(new PageComponentSorter(null, pages[i], null));
-                (new PageSaverTresholded(null)).Save(pc.Compose(), Paths.Experiments.OutputPages + pages[i].ID + "_reconstructedTR.png");
-                //logger.Out(nameof(PageTesting) + "." + nameof(CreateAndSave) + " - Saving page: " + (i + 1) + " / " + pages.Length);
-                //PageSaverFactory.Get().Save(pages[i], Paths.Experiments.OutputPages + pages[i].ID + "_reconstructed.png");
-            }
-            t.Stop();
-            logger.Out(nameof(PageTesting) + "." + nameof(CreateAndSave) + " - Total time: " + t.Elapsed);
-
-        }
+        }      
     }
 }

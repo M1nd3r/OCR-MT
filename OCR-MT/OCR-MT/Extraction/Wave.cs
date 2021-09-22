@@ -1,5 +1,6 @@
 ﻿using OCR_MT.Imaging;
 using OCR_MT.Utils;
+using System;
 using System.Collections.Generic;
 
 
@@ -9,6 +10,8 @@ namespace OCR_MT.Extraction {
         protected bool[,] _tested;
         protected int _x, _y;
         public Wave(IImage<T> img) {
+            if (img == null)
+                throw new ArgumentNullException();
             _img = img;
             _x = 0;
             _y = 0;
@@ -17,7 +20,7 @@ namespace OCR_MT.Extraction {
         }       
     }
     
-    abstract class WaveSingleTarget<T> : Wave<T>{
+    internal abstract class WaveSingleTarget<T> : Wave<T>{
         protected T _target;
         public WaveSingleTarget(IImage<T> img, T target) : base(img) {
             _target = target;

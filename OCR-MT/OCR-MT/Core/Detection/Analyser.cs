@@ -5,37 +5,46 @@ using OCR_MT.IO;
 using System.IO;
 using System.Linq;
 
-using static OCR_MT.Core.Metrics.LettersComponents;
-
 namespace OCR_MT.Core.Detection {
-    /// <summary>
-    /// Main analysing class that puts together all code components
-    /// </summary>
     class Analyser {
-        private readonly string _pathSource, _pathAlphabet;
+        private readonly string 
+            _pathSource, 
+            _pathAlphabet;
+        private IAlphabet _alphabet;
         public Analyser(string pathSource, string pathAlphabet) {
             _pathAlphabet = pathAlphabet;
             _pathSource = pathSource;
         }
         public IPage<byte>[] Analyse() {
-            IComponentExtractor ce = new ComponentBWExtractor();
-            IImageLoader<byte> imgLoader = new ImageBWLoader(ImageBWParserFactory.GetParser());
-            IAlphabet alphabet = new AlphabetLoaderDisc(_pathAlphabet, ce, imgLoader).Load();
-            IPageCreator pc = new PageCreator_MT();
-
-            var x = Directory.GetFiles(_pathSource).Skip(5).Take(5).ToArray();
-
-            IPage<byte>[] inputPages = pc.Create(Directory.GetFiles(_pathSource).Skip(5).Take(5).ToArray());
-            IPage<byte>[] outputPages = new IPage<byte>[inputPages.Length];
-            IComponentSortHandler handler = new ComponentSortHandlerDummy(SizeMetric);
-            ISorterPageSetable sorter = new PageComponentSorter(alphabet, null, handler);
-            IComposer composer = new PageComposer(sorter);
-
-            for (int i = 0; i < inputPages.Length; i++) {
-                sorter.SetPage(in inputPages[i]);
-                outputPages[i] = composer.Compose();
-            }
-            return outputPages;
+            _alphabet = GetSampleAlphabet();
+            IDocument<byte> inputDocument = GetSampleDocument();
+            IPageComposer composer = SetUpPageComposer();
+            return composer.Compose(inputDocument).GetPages.ToArray();
+        }
+        private IPageComposer SetUpPageComposer() {
+            ISorter<ILetter> sorter = SetUpPageComponentSorter();
+            return 
+                new PageComposerFactory<ILetter>().GetPageComposer()
+                    .SetSorter(sorter)
+                    .SetAlphabet(_alphabet);
+        }
+        private ISorter<ILetter> SetUpPageComponentSorter() {
+            return new PageComponentSorter(_alphabet);            
+        }
+        private IAlphabet GetSampleAlphabet( ) {
+            IComponentExtractor extractor = GetComponentExtractor();
+            IImageLoader<byte> imgLoader = GetImageLoader();
+            return new AlphabetLoaderDisc(_pathAlphabet, extractor, imgLoader).Load();
+        }
+        private IComponentExtractor GetComponentExtractor() => new ComponentBWExtractor();
+        private IImageLoader<byte> GetImageLoader()=> new ImageBWLoader(ImageBWParserFactory.GetParser());
+        private string[] GetSamplePagesPaths() {
+            return Directory.GetFiles(_pathSource).Skip(5).Take(5).ToArray();
+        }
+        private IDocument<byte> GetSampleDocument() {
+            IDocumentCreator dc = new DocumentCreator_MT();
+            var pagesPaths = GetSamplePagesPaths();
+            return dc.Create(pagesPaths);
         }
     }
 }

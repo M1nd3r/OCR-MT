@@ -2,66 +2,76 @@
 using System.Collections.Generic;
 
 namespace OCR_MT.Core.Identification {
-    class PageComponentSorter : ISorterPageSetable {
-        protected readonly IAlphabet _alphabet;
-        protected readonly IAlphabet _alphabetMutated;
-        protected IPage<byte> _page;
-        protected readonly IComponentSortHandler _handler;
-        protected readonly int _alphabetCount;
-        private List<IList<LetterComponentDist>> _sortedLetters;
-        public PageComponentSorter(in IAlphabet alphabet, in IPage<byte> page,
-            IComponentSortHandler handler
-            ) {
-            if (alphabet == null)
-                throw new ArgumentNullException("Argument " + nameof(IAlphabet) + " " + nameof(alphabet) + " is null");
-
-            if (handler == null)
-                throw new ArgumentNullException("Argument " + nameof(IComponentSortHandler) + " " + nameof(handler) + " is null");
-            _alphabet = alphabet;
-            _alphabetCount = alphabet.GetLetters.Count;
-            _page = page;
-            _handler = handler;
-            _alphabetMutated = _handler.Mutate(_alphabet);
+    class PageComponentSorter : ICleverSorter {
+        private IList<ICleverComponent> measurableComponents;
+        private IList<IList<ICleverComponent>> sortedMeasurableComponents;
+        private IAlphabet alphabet;
+        private IList<ICleverComponent> measurableAlphabet;
+        private ICleverComponentFactory componentFactory = new CleverComponentFactory();
+        private LetterBWFactory letterFactory = new LetterBWFactory();
+        public PageComponentSorter(IAlphabet alphabet) {
+            this.alphabet = alphabet;
+            ChangeAlphabetToMeasurable();
         }
-
-        public IAlphabet GetAlphabet => _alphabet;
-
-        public IPage<byte> GetPage => _page;
-        public void SetPage(in IPage<byte> page) => _page = page; //TODO not threadsafe
-
-        public void Sort(out IList<IList<LetterComponentDist>> sortedLetters) {
-            if (_page == null)
-                throw new ArgumentNullException("Variable " + nameof(IPage<byte>) + " " + nameof(_page) + " is null. There is no page to be acted on!");
-
-            _sortedLetters = InitializeSortedLettersList();
-            for (int i = 0; i < _page.Components.Count; i++) {
-                var component = _handler.Mutate(_page.Components[i]);
-                SortSingleComponent(component);
+        public IList<IList<ILetter>> Sort(IPage<byte> page) {
+            ChangeComponentsToMeasurable(page.Components);
+            SortMeasurableComponents();
+            var result = CreateLettersFromSortedComponents();
+            Clean();
+            return result;
+        }
+        private void ChangeComponentsToMeasurable(IList<IComponent<byte>> components) {
+            measurableComponents = ChangeToMeasurable(components);
+        }
+        private void ChangeAlphabetToMeasurable() {
+            measurableAlphabet = ChangeToMeasurable(alphabet.GetLetters);
+        }
+        private IList<ICleverComponent> ChangeToMeasurable<T>(IList<T> components) where T : IComponent<byte> {
+            IList<ICleverComponent> result = new List<ICleverComponent>();
+            foreach (var c in components)
+                result.Add(componentFactory.Create(c));
+            return result;
+        }
+        private IList<IList<T>> InitializeOutputList<T>(int length) {
+            var r = new List<IList<T>>(length);
+            for (int i = 0; i < length; i++) {
+                r.Add(new List<T>());
             }
-            sortedLetters = _sortedLetters;
+            return r;
         }
-        private List<IList<LetterComponentDist>> InitializeSortedLettersList() {
-            var sortedLetters = new List<IList<LetterComponentDist>>(_alphabetCount);
-            for (int i = 0; i < _alphabetCount; i++) {
-                sortedLetters.Add(new List<LetterComponentDist>());
+        private void SortMeasurableComponents() {
+            sortedMeasurableComponents = InitializeOutputList<ICleverComponent>(alphabet.GetLetters.Count);
+            foreach (var component in measurableComponents) {
+                SortMeasurableComponent(component);
+            }
+        }
+        private void SortMeasurableComponent(ICleverComponent component) {
+            double minDist = Int32.MaxValue;
+            int index = -1;
+            for (int i = 0; i < measurableAlphabet.Count; i++) {
+                double dist = component.Distance(measurableAlphabet[i]);
+                if (dist < minDist) {
+                    minDist = dist;
+                    index = i;
+                }
+                component.MinDistance = minDist;
+            }
+            if (index < 0)
+                throw new Exception("Component was not close to any letter of alphabet or the alphabet is empty");
+            sortedMeasurableComponents[index].Add(component);
+        }
+        private IList<IList<ILetter>> CreateLettersFromSortedComponents() {
+            var sortedLetters = InitializeOutputList<ILetter>(alphabet.GetLetters.Count);
+            for (int i = 0; i < sortedMeasurableComponents.Count; i++) {
+                foreach (var component in sortedMeasurableComponents[i]) {
+                    sortedLetters[i].Add(new LetterComponentDist(alphabet[i], component.GetComponent,component.MinDistance));
+                }
             }
             return sortedLetters;
         }
-        private void SortSingleComponent(IComponent<byte> component) {
-            (int index, double distance) = GetIndexAndMinDistance(component);
-            _sortedLetters[index].Add(new(_alphabet[index], component, distance));
-        }
-        private (int, double) GetIndexAndMinDistance(IComponent<byte> component) {
-            int indexMin = -1;
-            double minDist = Int32.MaxValue;
-            for (int y = 0; y < _alphabetCount; y++) {
-                var distance = _handler.Distance(_alphabet[y], component);
-                if (distance < minDist) {
-                    minDist = distance;
-                    indexMin = y;
-                }
-            }
-            return (indexMin, minDist);
+        private void Clean() {
+            measurableComponents = null;
+            sortedMeasurableComponents = null;
         }
     }
 }

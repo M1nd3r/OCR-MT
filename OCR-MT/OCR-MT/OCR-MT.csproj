@@ -56,7 +56,12 @@
 
   <ItemGroup>
     <Folder Include="IO\Database\" />
-    <Folder Include="Test\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <AssemblyAttribute Include="System.Runtime.CompilerServices.InternalsVisibleTo">
+      <_Parameter1>OCR-MT-Tests</_Parameter1>
+    </AssemblyAttribute>
   </ItemGroup>
 
 </Project>

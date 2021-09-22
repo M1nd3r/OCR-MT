@@ -35,11 +35,11 @@ namespace OCR_MT.Core {
             return new Page(ID, components, _img.Width, _img.Height);
         }
     }
-    class PageFactoryLetters : IPageFactory<byte> {
+    class PageFactoryLetters<T> : IPageFactory<byte> where T:ILetter {
         private readonly IPage _page;
-        private readonly IList<IList<LetterComponentDist>> _arrangedComponents;
-        private readonly DelegateFilter<LetterComponentDist> _filter;
-        public PageFactoryLetters(IPage page, IList<IList<LetterComponentDist>> arrangedComponents, DelegateFilter<LetterComponentDist> filter) {
+        private readonly IList<IList<T>> _arrangedComponents;
+        private readonly DelegateFilter<T> _filter;
+        public PageFactoryLetters(IPage page, IList<IList<T>> arrangedComponents, DelegateFilter<T> filter) {
             if (page == null)
                 throw new ArgumentNullException(nameof(page));
             if (arrangedComponents == null)
@@ -54,14 +54,17 @@ namespace OCR_MT.Core {
         public IPage<byte> Create() {
             List<IComponent<byte>> filteredComponentsList = new List<IComponent<byte>>();
             for (int i = 0; i < _arrangedComponents.Count; i++) {
-                filteredComponentsList.AddRange(_filter(_arrangedComponents[i]));
+                var x = _filter(_arrangedComponents[i]);
+                foreach (var item in x) {
+                    filteredComponentsList.Add(item);
+                }
             }
 
             int widthAdd = 0, heightAdd = 0;
             for (int i = 0; i < filteredComponentsList.Count; i++) {
-                var a = (filteredComponentsList[i] as LetterComponentDist);
-                var widthDiff = _page.Width - a.Width - a.component.MinX;
-                var heightDiff = _page.Height - a.Height - a.component.MinY;
+                var a = filteredComponentsList[i];
+                var widthDiff = a.Width + a.MinX - _page.Width;
+                var heightDiff = a.Height + a.MinY - _page.Height;
 
                 if (widthDiff > widthAdd)
                     widthAdd = widthDiff;

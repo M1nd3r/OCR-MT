@@ -1,10 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace OCR_MT.Core.Identification {
+﻿namespace OCR_MT.Core.Identification {
     class LetterComponentDist : ILetter {
         public ILetter letter;
         public IComponent<byte> component;
@@ -15,13 +9,7 @@ namespace OCR_MT.Core.Identification {
             this.distance = distance;
         }
         public byte this[int x, int y] => letter[x, y];
-        /// <summary>
-        /// Returns width of the letter component
-        /// </summary>
         public int Width => letter.Width;
-        /// <summary>
-        /// Returns height of the letter component
-        /// </summary>
         public int Height => letter.Height;
         public int MaxX => letter.MaxX + component.MinX;
         public int MinX => component.MinX;

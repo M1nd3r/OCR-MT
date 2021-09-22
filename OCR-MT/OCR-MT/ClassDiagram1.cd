@@ -3,30 +3,8 @@
   <Class Name="OCR_MT.Core.Detection.Analyser">
     <Position X="154.75" Y="4" Width="3.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAIEAAAAAAAAAAAAAAAAAAAAAAAAIAAAAAA=</HashCode>
+      <HashCode>AAACACAAAAIEAAAAACAIAADAAAAAAAAAAAgAIAAAACA=</HashCode>
       <FileName>Core\Detection\Analyser.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="OCR_MT.Core.Identification.AComponentSortHandler">
-    <Position X="12" Y="4" Width="5.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABACAgAAAAAAAA=</HashCode>
-      <FileName>Core\Identification\AComponentSortHandler.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="OCR_MT.Core.Identification.ComponentSortHandlerDummy">
-    <Position X="11.75" Y="6.75" Width="6" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
-      <FileName>Core\Identification\AComponentSortHandler.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="OCR_MT.Core.Identification.ComponentHandlerWithBenefits">
-    <Position X="11.75" Y="9.25" Width="6" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACAAAAAAAAAA=</HashCode>
-      <FileName>Core\Identification\AComponentSortHandler.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OCR_MT.Core.Identification.Alphabet" BaseTypeListCollapsed="true">
@@ -64,37 +42,22 @@
   <Class Name="OCR_MT.Core.Identification.PageComponentSorter" BaseTypeListCollapsed="true">
     <Position X="165.25" Y="4" Width="6.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAIAEAAQAAAAEQAAAAAAAQIAABAAgAAAAAAAA=</HashCode>
+      <HashCode>ABAAAAAAAEAAAABAAAASAAAAAAACABACAAgBAAAESAA=</HashCode>
       <FileName>Core\Identification\PageComponentSorter.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
-  <Class Name="OCR_MT.Core.Identification.PageComposerBase">
-    <Position X="73.25" Y="4" Width="4.75" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAABAAIAAAAAgAAAAAAAA=</HashCode>
-      <FileName>Core\Identification\PageComposer.cs</FileName>
-    </TypeIdentifier>
-    <Lollipop Position="0.2" />
-  </Class>
-  <Class Name="OCR_MT.Core.Identification.PageComposer">
-    <Position X="72.25" Y="6.75" Width="6.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAgAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Core\Identification\PageComposer.cs</FileName>
-    </TypeIdentifier>
-  </Class>
-  <Class Name="OCR_MT.Core.Metrics.LettersComponents" Collapsed="true">
+  <Class Name="OCR_MT.Core.Metrics.CleverComponents" Collapsed="true">
     <Position X="242" Y="1.5" Width="1.75" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAACA=</HashCode>
-      <FileName>Core\Metrics\LettersComponents.cs</FileName>
+      <FileName>Core\Metrics\CleverComponents.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OCR_MT.Core.ComponentBW&lt;T&gt;">
     <Position X="81.25" Y="4" Width="2.25" />
     <TypeIdentifier>
-      <HashCode>MAAAAAAwRAAAAIAACAABAGAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>MAgAAAAwRAAAAIAACAQBAGCAAAQAAAAAIAAAAAAAAAw=</HashCode>
       <FileName>Core\ComponentBW.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -102,14 +65,14 @@
   <Class Name="OCR_MT.Core.ComponentBW_byte">
     <Position X="79.5" Y="9.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAgAAAAAAAAAAAAAAg=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAACAAAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\ComponentBW.cs</FileName>
     </TypeIdentifier>
   </Class>
   <Class Name="OCR_MT.Core.ComponentBW_bit">
     <Position X="82.75" Y="9.25" Width="2.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAACAAAAAAAAAAgAAAAAAAAAAAAAAg=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAACAAAAACAAAAgAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\ComponentBW.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -181,7 +144,7 @@
       <FileName>Core\PageFactory.cs</FileName>
     </TypeIdentifier>
   </Class>
-  <Class Name="OCR_MT.Core.PageFactoryLetters" BaseTypeListCollapsed="true">
+  <Class Name="OCR_MT.Core.PageFactoryLetters&lt;T&gt;" BaseTypeListCollapsed="true">
     <Position X="215.75" Y="4" Width="8.25" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAIMEAAAAAAAAAAAA=</HashCode>
@@ -213,7 +176,7 @@
   <Class Name="OCR_MT.Experiments.PageTesting">
     <Position X="103.75" Y="4" Width="3.75" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAACSAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAACCAAAAAAAAAAAAAAAAAAQAAAAAAA=</HashCode>
       <FileName>Experiments\PageTesting.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -360,7 +323,7 @@
   <Class Name="OCR_MT.IO.AlphabetLoaderDisc" BaseTypeListCollapsed="true">
     <Position X="122.25" Y="4" Width="7" />
     <TypeIdentifier>
-      <HashCode>AAAAgAAAAAACAAAAAAAAAAAgAAAAAAAAAAAAAAABAAA=</HashCode>
+      <HashCode>AAAAggAAABAGAAAAAAAAEAAgAAAAQAAAAAAAAAABEAA=</HashCode>
       <FileName>IO\AlphabetLoaderDisc.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" Collapsed="true" />
@@ -435,9 +398,9 @@
     <Lollipop Position="0.2" Collapsed="true" />
   </Class>
   <Class Name="OCR_MT.IO.PageSaverBasic">
-    <Position X="60" Y="4" Width="3" />
+    <Position X="59.75" Y="4.25" Width="3" />
     <TypeIdentifier>
-      <HashCode>AAAAAIAAAAAAAAACAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>ABAAAIIAAAAAAAACAAAAAAAAAAAAAABAAAAAgQAAAAA=</HashCode>
       <FileName>IO\PageSaverBasic.cs</FileName>
     </TypeIdentifier>
     <Lollipop Position="0.2" />
@@ -450,7 +413,7 @@
     </TypeIdentifier>
   </Class>
   <Class Name="OCR_MT.IO.PageSaverTresholded">
-    <Position X="59.5" Y="6.25" Width="4" />
+    <Position X="59.5" Y="7.5" Width="4" />
     <TypeIdentifier>
       <HashCode>AAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAQAA=</HashCode>
       <FileName>IO\PageSaverTresholded.cs</FileName>
@@ -527,7 +490,7 @@
   <Class Name="OCR_MT.Program">
     <Position X="134" Y="4" Width="2" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAACAAAAAAAAAAAAAAAAAAAABAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAACAACAAAAAAAAAAAAAAAAABAIAAAA=</HashCode>
       <FileName>Program.cs</FileName>
     </TypeIdentifier>
   </Class>
@@ -542,38 +505,17 @@
       <FileName>Core\Identification\IAlphabet.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="OCR_MT.Core.Identification.IComponentSortHandler" Collapsed="true">
-    <Position X="247.25" Y="2.75" Width="2" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAABACAAAAAAAAAA=</HashCode>
-      <FileName>Core\Identification\IComponentSortHandler.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="OCR_MT.Core.Identification.IComposer" Collapsed="true">
+  <Interface Name="OCR_MT.Core.Identification.IPageComposer" Collapsed="true">
     <Position X="249" Y="2.75" Width="1.5" />
     <TypeIdentifier>
       <HashCode>AAAAAAAAEAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\Identification\IComposer.cs</FileName>
     </TypeIdentifier>
   </Interface>
-  <Interface Name="OCR_MT.Core.Identification.ISorter">
+  <Interface Name="OCR_MT.Core.Identification.ISorter&lt;T&gt;">
     <Position X="4.5" Y="0.5" Width="4.25" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAQAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Core\Identification\ISorter.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="OCR_MT.Core.Identification.ISorterWithAlphabet">
-    <Position X="5.5" Y="2.75" Width="2.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAIAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
-      <FileName>Core\Identification\ISorter.cs</FileName>
-    </TypeIdentifier>
-  </Interface>
-  <Interface Name="OCR_MT.Core.Identification.ISorterPageSetable">
-    <Position X="5.5" Y="4.75" Width="2.5" />
-    <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAAAAAAAAAAAAAAAAAAAABAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAAAAAAAAQAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\Identification\ISorter.cs</FileName>
     </TypeIdentifier>
   </Interface>
@@ -615,7 +557,7 @@
   <Interface Name="OCR_MT.Core.IDocument" Collapsed="true">
     <Position X="242" Y="3.5" Width="1.5" />
     <TypeIdentifier>
-      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAgAAAAAAAAAAAAAA=</HashCode>
+      <HashCode>AAAAAAAAAAAAgAAAAAAAAAAAAAAAAAAAAAAAAAAAAAA=</HashCode>
       <FileName>Core\IDocument.cs</FileName>
     </TypeIdentifier>
   </Interface>

@@ -5,7 +5,12 @@
         public IComponent<T> LetterComponent { get; }
     }
     interface ILetter : ILetter<byte> { }
-
+    class LetterBWFactory {
+        private static int counter=0;
+        public ILetter Create(string translation, IComponent<byte> component) {
+            return new LetterBW(++counter, translation, component);
+        }
+    }
     internal abstract class Letter<T> : ILetter<T> {
         public Letter(int ID, string translation, IComponent<T> component)
         {
@@ -31,6 +36,6 @@
     }
     class LetterBW : Letter<byte>, ILetter {
         public LetterBW(int ID, string translation, IComponent<byte> component)
-            : base(ID, translation, component) { }          
-    }
+            : base(ID, translation, component) { }
+    }    
 }

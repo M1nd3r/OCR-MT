@@ -1,9 +1,8 @@
 ﻿using OCR_MT.Imaging;
-using System;
 using System.Collections.Generic;
 
 namespace OCR_MT.Extraction {
-    class Wave_byte : WaveSingleTarget<byte> {
+    internal class Wave_byte : WaveSingleTarget<byte> {
         private Queue<(int x, int y)> toEvaluate;
         private bool includeDiagonal = false;
         private delegate void PositionsSolver(int x, int y);
@@ -42,7 +41,7 @@ namespace OCR_MT.Extraction {
                 (int x, int y) t = toEvaluate.Dequeue();
                 if (_img[t.x, t.y] == _target) {
                     q.Add((t.x, t.y));
-                    _positionsSolver(x, y);
+                    _positionsSolver(t.x, t.y);
                 }
             }
             return q;

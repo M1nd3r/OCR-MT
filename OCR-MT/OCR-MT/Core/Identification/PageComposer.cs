@@ -1,41 +1,87 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using static OCR_MT.Utils.Delegates;
 
 namespace OCR_MT.Core.Identification {
-    abstract class PageComposerBase : IComposer {
-        protected readonly ISorter _sorter;
-        protected readonly IAlphabet _alphabet;
-        protected IPage<byte> _page;
-        public PageComposerBase(ISorter sorter, IAlphabet alphabet, IPage<byte> page) {
+
+    abstract class APageComposerBase<T> : IPageComposer where T:ILetter {
+        protected ISorter<T> sorter=null;
+        protected IAlphabet alphabet=null;
+        abstract public IPage<byte> Compose(IPage<byte> page);
+        abstract public IDocument<byte> Compose(IDocument<byte> document);
+        public APageComposerBase<T> SetSorter(ISorter<T> sorter) {
+            this.sorter = sorter;
+            return this;
+        }
+        public APageComposerBase<T> SetAlphabet(IAlphabet alphabet) {
+            this.alphabet = alphabet;
+            return this;
+        }
+        public virtual void Dispose() {
+            this.sorter = null;
+            this.alphabet = null;
+        }
+        protected void VerifyComposerIsCorrectlySet() {
+            VerifySorterIsSet();
+            VerifyAlphabetIsSet();
+        }
+        private void VerifySorterIsSet() {
             if (sorter == null)
-                throw new ArgumentNullException("Argument " + sorter.GetType().ToString() + " " + nameof(sorter) + " is null");
+                throw new SorterIsNotCorrectlySetException();
+        }
+        private void VerifyAlphabetIsSet() {
             if (alphabet == null)
-                throw new ArgumentNullException("Argument " + nameof(IAlphabet) + " " + nameof(alphabet) + " is null");
-            //if (page == null)
-            //    throw new ArgumentNullException("Argument " + nameof(IPage<byte>) + " " + nameof(page) + " is null");
-            //TODO fix for descendants
-
-            _sorter = sorter;
-            _alphabet = alphabet;
-            _page = page;
+                throw new AlphabetIsNotCorrectlySetException();
         }
-
-        abstract public IPage<byte> Compose();
+        private class ComposerIsNotCorrectlySetException : Exception { }
+        private class SorterIsNotCorrectlySetException : ComposerIsNotCorrectlySetException { }
+        private class AlphabetIsNotCorrectlySetException : ComposerIsNotCorrectlySetException { }
     }
-    class PageComposer : PageComposerBase {
-        protected DelegateFilter<LetterComponentDist> _delegateFilter;
-        public PageComposer(ISorterWithAlphabet sorter, DelegateFilter<LetterComponentDist> delegateFilter = null)
-            : base(sorter, sorter.GetAlphabet, sorter.GetPage) {
-            _delegateFilter = delegateFilter;
+    sealed class PageComposer<T> : APageComposerBase<T> where T:ILetter {
+        private IDocument<byte> originalDoc = null;
+        private DelegateFilter<T> filter = null;
+        public override IPage<byte> Compose(IPage<byte> page) {
+            VerifyArgumentIsNotNull(page);
+            VerifyComposerIsCorrectlySet();
+
+            var newPage = ComposePage(page);
+            Clean();
+            return newPage;
         }
-        override public IPage<byte> Compose() {
-            _sorter.Sort(out var sortedComponents);
-            _page = _sorter.GetPage; //TODO fix, does not make sense to do it this way
-            return (new PageFactoryLetters(_page, sortedComponents, (_delegateFilter == null) ? (i => i) : _delegateFilter)).Create();
+        public override IDocument<byte> Compose(IDocument<byte> document) {
+            VerifyArgumentIsNotNull(document);
+            VerifyComposerIsCorrectlySet();
+
+            var doc = ComposeDocument(document);
+            Clean();
+            return doc;
+        }
+        public void SetFilter(DelegateFilter<T> filter) {
+            this.filter = filter;
+        }
+        private IPage<byte> ComposePage(IPage<byte> page) {
+            var sortedLetters = sorter.Sort(page);
+            return new PageFactoryLetters<T>(page, sortedLetters, filter ?? (i => i)).Create();
+        }
+        private IDocument<byte> ComposeDocument(IDocument<byte> document) {
+            this.originalDoc = document;
+            var doc = CreateNewDocument();
+            AddComposedPagesToDocument(doc);
+            return doc;
+        }
+        private IDocument<byte> CreateNewDocument() {
+            return Document.GetDocument();
+        }
+        private void AddComposedPagesToDocument(IDocument<byte> document) {
+            foreach (var page in originalDoc.GetPages) {
+                document.AddPage(Compose(page));
+            }
+        }
+        private void VerifyArgumentIsNotNull(object arg) {
+            if(arg==null)
+                throw new ArgumentNullException();
+        }
+        private void Clean() {
+            this.originalDoc = null;
         }
     }
 }
