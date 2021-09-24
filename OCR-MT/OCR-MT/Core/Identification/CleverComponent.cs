@@ -17,12 +17,4 @@ namespace OCR_MT.Core.Identification {
         public IComponent<byte> GetComponent { get => _component; }
         public double MinDistance { get; set; }
     }
-    interface ICleverComponentFactory {
-        public ICleverComponent Create(IComponent<byte> component);
-    }
-    class CleverComponentFactory : ICleverComponentFactory {
-        public ICleverComponent Create(IComponent<byte> component) {
-            return new CleverComponent(component);
-        }
-    }
 }
