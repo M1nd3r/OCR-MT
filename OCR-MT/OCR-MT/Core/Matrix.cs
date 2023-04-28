@@ -3,7 +3,6 @@ using System.Collections;
 using static OCR_MT.Utils.Constants;
 
 namespace OCR_MT.Core {
-
     internal abstract class Matrix {
         public int Width { get; protected set; }
         public int Height { get; protected set; }
