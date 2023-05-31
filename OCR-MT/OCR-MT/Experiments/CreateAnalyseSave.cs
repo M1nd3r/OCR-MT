@@ -8,7 +8,7 @@ namespace OCR_MT.Experiments {
         private static IPage<byte>[] pages = null;
         private static string
                 sourcePath = @"D:\GitHub\OCR-CS\OCR\OCR\images\Karpaty\", //pages to analyse
-                alphabetPath = @"D:\GitHub\OCR-MT\abeceda\abeceda_Verne\", //alphabet to be used - path of pseduo-root folder of alphabet
+                alphabetPath = @"D:\GitHub\OCR-MT\abeceda\abeceda_Verne\", //alphabet to be used - path of pseudo-root folder of alphabet
                 outputFolder = @"D:\GitHub\OCR-MT\abeceda\2\"; //folder where to output translated pages
         public static void Run() {            
             Analyser a = new Analyser(sourcePath, alphabetPath);

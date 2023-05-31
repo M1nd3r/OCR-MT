@@ -12,12 +12,12 @@ namespace OCR_MT {
         private static ILogger logger = LoggerFactory.GetLogger();
         static void Main(string[] args) {
 
-            //SOLID
-            //Single Responsibility Principle
-            //Open-Close Principle
-            //Liskov substitution Principle
-            //Interface Segregation Principle
-            //Dependency Inversion Principle
+            // SOLID
+            // Single Responsibility Principle
+            // Open-Close Principle
+            // Liskov substitution Principle
+            // Interface Segregation Principle
+            // Dependency Inversion Principle
 
             WriteAlphabet();
 
